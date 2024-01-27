@@ -1,5 +1,12 @@
 package az.keytd.expensetracker.entities;
 
+import java.util.Collection;
+import java.util.Collections;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +17,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Users")
 
-public class Users {
+public class Users implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -155,6 +162,36 @@ public class Users {
 
     public void setUptadedAt(String uptadedAt) {
         this.uptadedAt = uptadedAt;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+         return Collections.singleton(new SimpleGrantedAuthority(role)) ;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.firstName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+       return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        ;return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
    
