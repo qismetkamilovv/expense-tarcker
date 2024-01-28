@@ -20,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import az.keytd.expensetracker.repository.UserRepository;
+import az.keytd.expensetracker.service.UsersService;
 
 @Configuration
 @EnableWebSecurity
@@ -27,6 +28,12 @@ import az.keytd.expensetracker.repository.UserRepository;
 public class SecurityConfig {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UsersService usersService;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -38,18 +45,6 @@ public class SecurityConfig {
                 .build();
     }
 
-     @Bean
-    public UserDetailsService userDetailsService() {
-        return new UserDetailsService() {
-
-            @Override
-            public UserDetails loadUserByUsername(String firstName) throws UsernameNotFoundException {
-                return userRepository.findByEmail(firstName);
-            }
-
-        };
-    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -58,7 +53,7 @@ public class SecurityConfig {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService());
+        authenticationProvider.setUserDetailsService(userDetailsService);
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
 
