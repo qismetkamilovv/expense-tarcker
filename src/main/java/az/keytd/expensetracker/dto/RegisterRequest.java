@@ -7,6 +7,8 @@ public class RegisterRequest {
 
     private String email;
 
+    private String password;
+    
     public String getFirstName() {
         return firstName;
     }
@@ -39,5 +41,4 @@ public class RegisterRequest {
         this.password = password;
     }
 
-    private String password;
 }

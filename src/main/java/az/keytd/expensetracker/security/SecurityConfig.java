@@ -26,12 +26,7 @@ import az.keytd.expensetracker.service.UsersService;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private UsersService usersService;
-
+    
     @Autowired
     private UserDetailsService userDetailsService;
 
