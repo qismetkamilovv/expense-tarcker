@@ -17,7 +17,7 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public ResponseEntity signUp(RegisterRequest request) {
         Response response = authenticationService.register(request);
         
