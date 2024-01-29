@@ -7,5 +7,5 @@ import az.keytd.expensetracker.entities.Expenses;
 
 @Repository
 public interface ExpensesRepository extends JpaRepository<Expenses,Long> {
-    
+    Expenses findByAccountId(long accountId);
 }

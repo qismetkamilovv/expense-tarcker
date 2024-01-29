@@ -10,14 +10,14 @@ import az.keytd.expensetracker.dto.LoginRequest;
 import az.keytd.expensetracker.dto.RegisterRequest;
 import az.keytd.expensetracker.dto.Response;
 import az.keytd.expensetracker.entities.Users;
-import az.keytd.expensetracker.repository.UserRepository;
+import az.keytd.expensetracker.repository.UsersRepository;
 import az.keytd.expensetracker.security.JwtService;
 
 @Service
 public class AuthenticationService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UsersRepository userRepository;
 
     @Autowired
     private JwtService jwtService;
