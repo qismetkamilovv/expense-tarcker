@@ -19,22 +19,23 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import az.keytd.expensetracker.repository.UserRepository;
-import az.keytd.expensetracker.service.UsersService;
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
     
     @Autowired
+
     private UserDetailsService userDetailsService;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(req -> req.requestMatchers("/register").permitAll()
-                        .requestMatchers("/login").authenticated())
+                .authorizeHttpRequests(
+                        req -> req.requestMatchers("/register", "/login", "/all", "/get/allAddress")
+                        .permitAll()
+                                .requestMatchers("/updateUser").authenticated())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .build();

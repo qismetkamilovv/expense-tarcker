@@ -17,7 +17,7 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @PostMapping("/register")
+    @PostMapping("register")
     public ResponseEntity signUp(RegisterRequest request) {
         Response response = authenticationService.register(request);
         
@@ -28,6 +28,6 @@ public class AuthenticationController {
     public ResponseEntity signIn(LoginRequest request) {
         Response response = authenticationService.login(request);
 
-        return ResponseEntity.ok(request);
+        return ResponseEntity.ok(response);
     }
 }
