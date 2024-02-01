@@ -7,10 +7,20 @@ public class RegisterRequest {
 
     private String email;
 
+    private String Role ;
+    
     private String password;
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public String getRole() {
+        return Role;
+    }
+
+    public void setRole(String role) {
+        Role = role;
     }
 
     public void setFirstName(String firstName) {

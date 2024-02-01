@@ -5,6 +5,7 @@ Content-Type:  application/json
     "firstName":"Qismet",
     "lastName": "Kamilov",
     "email":"qismet600@gmail.com",
+    "role":"Admin",
     "password": "qismet123",
 }
 

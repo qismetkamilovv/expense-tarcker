@@ -10,7 +10,7 @@ import az.keytd.expensetracker.entities.Income;
 import az.keytd.expensetracker.service.IncomeService;
 
 @RestController
-@RequestMapping("auth")
+@RequestMapping("Income")
 public class IncomeController {
     @Autowired
     private IncomeService incomeService;

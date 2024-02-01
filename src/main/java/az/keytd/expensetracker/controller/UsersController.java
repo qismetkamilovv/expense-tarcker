@@ -17,7 +17,7 @@ import az.keytd.expensetracker.service.UsersService;
 import java.util.List;
 
 @RestController
-@RequestMapping("auth")
+@RequestMapping("Users")
 public class UsersController {
     @Autowired
     private UsersService usersService;

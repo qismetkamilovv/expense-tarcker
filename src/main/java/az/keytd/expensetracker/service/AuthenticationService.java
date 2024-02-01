@@ -33,6 +33,7 @@ public class AuthenticationService {
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setEmail(request.getEmail());
+        user.setRole(request.getRole());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         userRepository.save(user);
 
