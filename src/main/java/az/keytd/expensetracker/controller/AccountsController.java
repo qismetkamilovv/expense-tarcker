@@ -9,7 +9,7 @@ import az.keytd.expensetracker.entities.Accounts;
 import az.keytd.expensetracker.service.AccountsService;
 
 @RestController
-@RequestMapping("auth")
+@RequestMapping("Accounts")
 public class AccountsController {
     @Autowired
     private AccountsService accountsService ;
