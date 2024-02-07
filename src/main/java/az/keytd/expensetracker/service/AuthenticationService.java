@@ -20,6 +20,9 @@ public class AuthenticationService {
     private UsersRepository userRepository;
 
     @Autowired
+    private UsersService usersService ;
+
+    @Autowired
     private JwtService jwtService;
 
     @Autowired
@@ -35,7 +38,7 @@ public class AuthenticationService {
         user.setEmail(request.getEmail());
         user.setRole(request.getRole());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        userRepository.save(user);
+        usersService.save(request);
 
         String token = jwtService.generateToken(user);
 
@@ -45,7 +48,7 @@ public class AuthenticationService {
 
     public Response login(LoginRequest request){
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-        Users user = userRepository.findByEmail(request.getEmail());
+        Users user = usersService.findByEmail(request.getEmail());
         String token = jwtService.generateToken(user);
 
         return new Response(200, "ok", token);

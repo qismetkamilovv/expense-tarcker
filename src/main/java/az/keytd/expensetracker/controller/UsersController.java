@@ -27,6 +27,11 @@ public class UsersController {
         return usersService.findByAllAddress(address);
     }
 
+    @GetMapping("get/email")
+    public Users findByEmail(String email){
+        return usersService.findByEmail(email);
+    }
+
     @PutMapping("updateUser")
     public ResponseEntity<Users>updateData(@PathVariable long id, @RequestBody CreateUser us){
         Users updatedData = usersService.updateData(id, us);
@@ -38,4 +43,6 @@ public class UsersController {
         usersService.save(newUser);
         return ResponseEntity.ok().build();
     }
+
+
 }

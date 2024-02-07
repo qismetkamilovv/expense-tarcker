@@ -1,5 +1,7 @@
 package az.keytd.expensetracker.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +13,9 @@ public class AccountsService {
     @Autowired
     private AccountsRepository accountsRepository;
 
-    public Accounts findByName(String name) {
+    public List<Accounts> getByAllUserId(String userId) {
 
-        return accountsRepository.findByName(name);
-
+        return accountsRepository.getByAllUserId(userId);
     }
+
 }

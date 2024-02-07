@@ -7,16 +7,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import az.keytd.expensetracker.dto.CreateUser;
+import az.keytd.expensetracker.dto.RegisterRequest;
 import az.keytd.expensetracker.entities.Users;
 import az.keytd.expensetracker.exceptions.NotFoundException;
-import az.keytd.expensetracker.repository.UsersRepository;
-
 import az.keytd.expensetracker.repository.UsersRepository;
 
 @Service
@@ -36,30 +34,27 @@ public class UsersService implements UserDetailsService {
         return userRepository.findAllByAddress(address);
     }
 
+    public Users findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     public Users updateData(Long id, CreateUser us) {
-        Optional<Users> existingData = userRepository.findById(id);
+        Users existingData = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Data with ID " + id + " not found"));
 
-        if (existingData.isPresent()) {
-
-            Users data = existingData.get();
-
-            if (StringUtils.hasText(us.getFirstName())) {
-                data.setFirstName(us.getFirstName());
-            }
-            if (StringUtils.hasText(us.getLastName())) {
-                data.setLastName(us.getLastName());
-            }
-            if (StringUtils.hasText(us.getEmail())) {
-                data.setEmail(us.getEmail());
-            }
-            if (StringUtils.hasText(us.getPassword())) {
-                data.setPassword(us.getPassword());
-            }
-            return userRepository.save(data);
-        } else {
-            throw new NotFoundException("Data with ID " + id + " not found");
+        if (StringUtils.hasText(us.getFirstName())) {
+            existingData.setFirstName(us.getFirstName());
         }
-
+        if (StringUtils.hasText(us.getLastName())) {
+            existingData.setLastName(us.getLastName());
+        }
+        if (StringUtils.hasText(us.getEmail())) {
+            existingData.setEmail(us.getEmail());
+        }
+        if (StringUtils.hasText(us.getPassword())) {
+            existingData.setPassword(us.getPassword());
+        }
+        return userRepository.save(existingData);
     }
 
     public void save(CreateUser newUser) {
@@ -71,4 +66,13 @@ public class UsersService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    public void save(RegisterRequest newUser) {
+        Users user = new Users();
+        user.setFirstName(newUser.getFirstName());
+        user.setLastName(newUser.getLastName());
+        user.setEmail(newUser.getEmail());
+        user.setPassword(newUser.getPassword());
+        user.setRole(newUser.getRole());
+        userRepository.save(user);
+    }
 }
