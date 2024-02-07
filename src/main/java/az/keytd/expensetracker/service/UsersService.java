@@ -39,22 +39,22 @@ public class UsersService implements UserDetailsService {
     }
 
     public Users updateData(Long id, CreateUser us) {
-        Users existingData = userRepository.findById(id)
+        Users user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Data with ID " + id + " not found"));
 
         if (StringUtils.hasText(us.getFirstName())) {
-            existingData.setFirstName(us.getFirstName());
+            user.setFirstName(us.getFirstName());
         }
         if (StringUtils.hasText(us.getLastName())) {
-            existingData.setLastName(us.getLastName());
+            user.setLastName(us.getLastName());
         }
         if (StringUtils.hasText(us.getEmail())) {
-            existingData.setEmail(us.getEmail());
+            user.setEmail(us.getEmail());
         }
         if (StringUtils.hasText(us.getPassword())) {
-            existingData.setPassword(us.getPassword());
+            user.setPassword(us.getPassword());
         }
-        return userRepository.save(existingData);
+        return userRepository.save(user);
     }
 
     public void save(CreateUser newUser) {
