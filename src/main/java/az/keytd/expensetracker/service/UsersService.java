@@ -8,6 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -20,11 +22,14 @@ import az.keytd.expensetracker.repository.UsersRepository;
 @Service
 
 public class UsersService implements UserDetailsService {
+
     @Autowired
     private UsersRepository userRepository;
 
+
     @Autowired
     private PasswordEncoder passwordEncoder;
+
 
     @Override
     public UserDetails loadUserByUsername(String firstName) throws UsernameNotFoundException {
@@ -32,6 +37,7 @@ public class UsersService implements UserDetailsService {
         return userRepository.findByEmail(firstName);
 
     }
+
 
     public List<Users> findByAllAddress(String address) {
         return userRepository.findAllByAddress(address);
@@ -69,4 +75,9 @@ public class UsersService implements UserDetailsService {
         user.setRole(newUser.getRole());
         return userRepository.save(user);
     }
+
+    public List<Users> findByAllAddress(String address) {
+        return userRepository.findAllByAddress(address);
+    }
+        
 }
