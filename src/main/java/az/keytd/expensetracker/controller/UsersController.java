@@ -23,26 +23,19 @@ public class UsersController {
     private UsersService usersService;
 
     @GetMapping("get/allAddress")
-    public List<Users>findAllByAddress(String address){
+    public List<Users> findAllByAddress(String address) {
         return usersService.findByAllAddress(address);
     }
 
     @GetMapping("get/email")
-    public Users findByEmail(String email){
+    public Users findByEmail(String email) {
         return usersService.findByEmail(email);
     }
 
     @PutMapping("updateUser")
-    public ResponseEntity<Users>updateData(@PathVariable long id, @RequestBody CreateUser us){
+    public ResponseEntity<Users> updateData(@PathVariable long id, @RequestBody CreateUser us) {
         Users updatedData = usersService.updateData(id, us);
         return ResponseEntity.ok(updatedData);
     }
-
-    @PostMapping("saveUser")
-    public ResponseEntity<String> save(CreateUser newUser){
-        usersService.save(newUser);
-        return ResponseEntity.ok().build();
-    }
-
 
 }

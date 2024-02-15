@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -23,12 +23,15 @@ public class UsersService implements UserDetailsService {
     @Autowired
     private UsersRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String firstName) throws UsernameNotFoundException {
 
         return userRepository.findByEmail(firstName);
 
-    };
+    }
 
     public List<Users> findByAllAddress(String address) {
         return userRepository.findAllByAddress(address);
@@ -57,22 +60,13 @@ public class UsersService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public void save(CreateUser newUser) {
+    public Users save(RegisterRequest newUser) {
         Users user = new Users();
         user.setFirstName(newUser.getFirstName());
         user.setLastName(newUser.getLastName());
         user.setEmail(newUser.getEmail());
-        user.setPassword(newUser.getPassword());
-        userRepository.save(user);
-    }
-
-    public void save(RegisterRequest newUser) {
-        Users user = new Users();
-        user.setFirstName(newUser.getFirstName());
-        user.setLastName(newUser.getLastName());
-        user.setEmail(newUser.getEmail());
-        user.setPassword(newUser.getPassword());
+        user.setPassword(passwordEncoder.encode(newUser.getPassword()));
         user.setRole(newUser.getRole());
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 }
