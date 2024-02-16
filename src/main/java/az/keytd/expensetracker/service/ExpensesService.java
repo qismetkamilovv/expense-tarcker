@@ -14,4 +14,6 @@ public class ExpensesService {
     public Expenses findByAccountId(long accountId){
         return expensesRepository.findByAccountId(accountId);
     }
+
+    // add service to subtract amount and also decrease account balance
 }
