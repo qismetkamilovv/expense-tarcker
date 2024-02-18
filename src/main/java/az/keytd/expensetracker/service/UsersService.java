@@ -26,10 +26,8 @@ public class UsersService implements UserDetailsService {
     @Autowired
     private UsersRepository userRepository;
 
-
     @Autowired
     private PasswordEncoder passwordEncoder;
-
 
     @Override
     public UserDetails loadUserByUsername(String firstName) throws UsernameNotFoundException {
@@ -37,7 +35,6 @@ public class UsersService implements UserDetailsService {
         return userRepository.findByEmail(firstName);
 
     }
-
 
     public List<Users> findByAllAddress(String address) {
         return userRepository.findAllByAddress(address);
@@ -76,8 +73,4 @@ public class UsersService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public List<Users> findByAllAddress(String address) {
-        return userRepository.findAllByAddress(address);
-    }
-        
 }
