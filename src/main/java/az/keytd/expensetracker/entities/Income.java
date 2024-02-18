@@ -13,6 +13,7 @@ public class Income {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    // todo use primitive type wrappers
     private long id;
 
     @Column(name = "userId")

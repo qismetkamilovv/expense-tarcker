@@ -15,4 +15,6 @@ public class IncomeService {
     public List <Income> getAll(){
        return  incomeRepository.findAll();
     }
+
+    // service for add income
 }

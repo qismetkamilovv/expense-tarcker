@@ -9,12 +9,15 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
+// use singular for class names
 public class Accounts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
+    // todo use primitive wrappers, (Long, Integer, Double etc.), Long
     private long id ;
 
+    // same as above
     @Column(name = "userId")
     private long userId ;
 

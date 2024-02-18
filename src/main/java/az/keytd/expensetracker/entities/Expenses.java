@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Expenses")
-
+// todo rename to singular tables names should plural, Expense
 public class Expenses {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
