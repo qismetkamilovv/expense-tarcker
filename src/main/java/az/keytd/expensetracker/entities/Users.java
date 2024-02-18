@@ -15,13 +15,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Users")
-
+@Table(name = "Users") // this is fine
+// TODO rename class to "User", plural names are used in tables names
 public class Users implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    // todo use primitive wrapper, this in case Long
     private long id;
 
     @Column(name = "firstName")

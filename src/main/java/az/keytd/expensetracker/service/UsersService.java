@@ -33,7 +33,7 @@ public class UsersService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String firstName) throws UsernameNotFoundException {
-
+        // TODO you already have findByEmail method in this service, use it
         return userRepository.findByEmail(firstName);
 
     }
@@ -43,7 +43,9 @@ public class UsersService implements UserDetailsService {
         return userRepository.findAllByAddress(address);
     }
 
+    // TODO this one
     public Users findByEmail(String email) {
+        // TODO what happens if user with this email does NOT exist?
         return userRepository.findByEmail(email);
     }
 

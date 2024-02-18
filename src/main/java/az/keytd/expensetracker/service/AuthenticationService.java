@@ -29,6 +29,8 @@ public class AuthenticationService {
         Users user = usersService.save(request);
 
         String token = jwtService.generateToken(user);
+        
+        // TODO send OTP via email here
 
         return new Response(200, "ok", token);
 
@@ -37,6 +39,8 @@ public class AuthenticationService {
     public Response login(LoginRequest request) {
         authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+
+                // TODO extract  findbyEmail call to UserServices
         Users user = usersService.findByEmail(request.getEmail());
         String token = jwtService.generateToken(user);
 
