@@ -15,15 +15,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Users") // this is fine
-// TODO rename class to "User", plural names are used in tables names
-public class Users implements UserDetails {
+@Table(name = "Users") 
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    // todo use primitive wrapper, this in case Long
-    private long id;
+    private Long id;
 
     @Column(name = "firstName")
     private String firstName;
@@ -61,11 +59,11 @@ public class Users implements UserDetails {
     @Column(name = "uptadedAt")
     private String uptadedAt;
     
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

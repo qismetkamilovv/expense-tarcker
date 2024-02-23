@@ -15,39 +15,43 @@ import org.springframework.util.StringUtils;
 
 import az.keytd.expensetracker.dto.CreateUser;
 import az.keytd.expensetracker.dto.RegisterRequest;
-import az.keytd.expensetracker.entities.Users;
+import az.keytd.expensetracker.entities.User;
 import az.keytd.expensetracker.exceptions.NotFoundException;
-import az.keytd.expensetracker.repository.UsersRepository;
+import az.keytd.expensetracker.repository.UserRepository;
 
 @Service
 
-public class UsersService implements UserDetailsService {
+public class UserService implements UserDetailsService {
 
     @Autowired
-    private UsersRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String firstName) throws UsernameNotFoundException {
-        // TODO you already have findByEmail method in this service, use it
-        return userRepository.findByEmail(firstName);
+        return getByEmail(firstName);
 
     }
 
-    public List<Users> findByAllAddress(String address) {
+    public List<User> findByAllAddress(String address) {
         return userRepository.findAllByAddress(address);
     }
 
-    // TODO this one
-    public Users findByEmail(String email) {
-        // TODO what happens if user with this email does NOT exist?
+    public User getByEmail(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new NotFoundException(email + " not found"));
+
+        return userRepository.save(user);
+    }
+
+    public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    public Users updateData(Long id, CreateUser us) {
-        Users user = userRepository.findById(id)
+    public User updateData(Long id, CreateUser us) {
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Data with ID " + id + " not found"));
 
         if (StringUtils.hasText(us.getFirstName())) {
@@ -65,8 +69,8 @@ public class UsersService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public Users save(RegisterRequest newUser) {
-        Users user = new Users();
+    public User save(RegisterRequest newUser) {
+        User user = new User();
         user.setFirstName(newUser.getFirstName());
         user.setLastName(newUser.getLastName());
         user.setEmail(newUser.getEmail());

@@ -9,12 +9,11 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Expenses")
-// todo rename to singular tables names should plural, Expense
-public class Expenses {
+public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id ;
+    private Long id ;
 
     @Column(name = "userId")
     private String userId ;
@@ -23,13 +22,13 @@ public class Expenses {
     private String title;
 
     @Column(name = "amount")
-    private long amount ;
+    private Long amount ;
 
     @Column (name = "accountId")
-    private long accountId;
+    private Long accountId;
 
     @Column(name = "categoryId")
-    private long categoryId;
+    private Long categoryId;
 
     @Column(name = "expenseDate")
     private String expenseDate;
@@ -40,11 +39,11 @@ public class Expenses {
     @Column(name = "uptadedAt")
     private String uptadedAt;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -64,27 +63,27 @@ public class Expenses {
         this.title = title;
     }
 
-    public long getAmount() {
+    public Long getAmount() {
         return amount;
     }
 
-    public void setAmount(long amount) {
+    public void setAmount(Long amount) {
         this.amount = amount;
     }
 
-    public long getAccountId() {
+    public Long getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(long accountId) {
+    public void setAccountId(Long accountId) {
         this.accountId = accountId;
     }
 
-    public long getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(long categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 
