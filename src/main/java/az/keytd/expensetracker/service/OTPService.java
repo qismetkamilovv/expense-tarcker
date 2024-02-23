@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class OTPService {
     private static final String OTP_CHARS = "0123456789";
     private static final int OTP_LENGTH = 6;
-
+    // TODO javameilsender instead of ypur mailsender service
     @Autowired
     private JavaMailSender javaMailSender;
 
@@ -24,9 +24,10 @@ public class OTPService {
         return otp.toString();
     }
 
-    public void sendOTPEmail(String to, String otp) {
+    public void sendByEmail(String to, String otp) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(to);
+        // TODO create text veriable string type= "your code: " + otp
         mailMessage.setText("your OTP" + otp);
 
         javaMailSender.send(mailMessage);

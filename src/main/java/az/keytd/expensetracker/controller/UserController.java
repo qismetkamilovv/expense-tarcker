@@ -28,7 +28,7 @@ public class UserController {
         return usersService.findByAllAddress(address);
     }
 
-    @GetMapping("email")
+    @GetMapping("user/by-email")
     public Optional<User> findByEmail(String email) {
         return usersService.findByEmail(email);
     }

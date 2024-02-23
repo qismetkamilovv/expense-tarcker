@@ -1,5 +1,4 @@
 learn about enum;
-
-===============================================================
-read otp ;
-how to generate 6 digit otp;
+difference beetwen RequestParam, PathVAriable, RequestBody;
+http path structure;
+send OTP with mail;
