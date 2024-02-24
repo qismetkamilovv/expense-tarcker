@@ -51,7 +51,7 @@ public class User implements UserDetails {
     private String role;
 
     @Column(name = "status")
-    private String status;
+    private Status status;
 
     @Column(name = "createdAt")
     private String createdAt;
@@ -139,11 +139,11 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
