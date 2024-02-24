@@ -22,7 +22,7 @@ public class Expense {
     private String title;
 
     @Column(name = "amount")
-    private Long amount ;
+    private Double amount ;
 
     @Column (name = "accountId")
     private Long accountId;
@@ -63,11 +63,11 @@ public class Expense {
         this.title = title;
     }
 
-    public Long getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
