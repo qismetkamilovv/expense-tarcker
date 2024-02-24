@@ -4,16 +4,15 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OTPService {
     private static final String OTP_CHARS = "0123456789";
     private static final int OTP_LENGTH = 6;
-    // TODO javameilsender instead of ypur mailsender service
+
     @Autowired
-    private JavaMailSender javaMailSender;
+    private MailSenderService mailSenderService;
 
     public static String generateOtp() {
         StringBuilder otp = new StringBuilder();
@@ -27,9 +26,9 @@ public class OTPService {
     public void sendByEmail(String to, String otp) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(to);
-        // TODO create text veriable string type= "your code: " + otp
-        mailMessage.setText("your OTP" + otp);
+        String text = "your code: " + otp;
+        mailMessage.setText(text);
 
-        javaMailSender.send(mailMessage);
+        mailSenderService.sendMail(to, text);
     }
 }

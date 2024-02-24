@@ -25,12 +25,17 @@ public class AuthenticationService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
+    private OTPService otpService;
+
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     public Response register(RegisterRequest request) {
         User user = userService.save(request, passwordEncoder);
         String token = jwtService.generateToken(user);
-        // TODO send OTP via email here
+        String otp = otpService.generateOtp();
+        otpService.sendByEmail(user.getEmail(), otp);
+        
         return new Response(200, "ok", token);
 
     }
