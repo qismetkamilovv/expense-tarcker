@@ -22,7 +22,7 @@ public class IncomeController {
         return incomeService.getAll();
     }
 
-    @PutMapping ("income")
+    @PutMapping ("income/add")
     public ResponseEntity<Income> income(Long userId, Double amount ){
         incomeService.income(userId, amount);
         return ResponseEntity.ok().build();

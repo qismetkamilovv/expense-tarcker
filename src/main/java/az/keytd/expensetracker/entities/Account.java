@@ -1,5 +1,7 @@
 package az.keytd.expensetracker.entities;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,13 +34,13 @@ public class Account {
     private String status;
 
     @Column(name = "createAt")
-    private String createAt;
+    private LocalDateTime createAt;
 
     @Column(name = "updatedAt")
-    private String updatedAt;
+    private LocalDateTime updatedAt;
 
     @Column(name = "deletedAt")
-    private String deletedAt;
+    private LocalDateTime deletedAt;
 
     public Long getId() {
         return id;
@@ -88,27 +90,27 @@ public class Account {
         this.status = status;
     }
 
-    public String getCreateAt() {
+    public LocalDateTime getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(String createAt) {
+    public void setCreateAt(LocalDateTime createAt) {
         this.createAt = createAt;
     }
 
-    public String getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 
-    public String getDeletedAt() {
+    public LocalDateTime getDeletedAt() {
         return deletedAt;
     }
 
-    public void setDeletedAt(String deletedAt) {
+    public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
     }
 }

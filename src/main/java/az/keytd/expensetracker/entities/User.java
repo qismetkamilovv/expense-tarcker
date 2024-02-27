@@ -1,5 +1,6 @@
 package az.keytd.expensetracker.entities;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -54,10 +55,10 @@ public class User implements UserDetails {
     private Status status;
 
     @Column(name = "createdAt")
-    private String createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "uptadedAt")
-    private String uptadedAt;
+    private LocalDateTime uptadedAt;
     
     public Long getId() {
         return id;
@@ -147,19 +148,19 @@ public class User implements UserDetails {
         this.status = status;
     }
 
-    public String getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getUptadedAt() {
+    public LocalDateTime getUptadedAt() {
         return uptadedAt;
     }
 
-    public void setUptadedAt(String uptadedAt) {
+    public void setUptadedAt(LocalDateTime uptadedAt) {
         this.uptadedAt = uptadedAt;
     }
 

@@ -10,11 +10,10 @@ public class MailSenderService {
     @Autowired
     private JavaMailSender javamailSender;
 
-    public String sendMail(String to, String text) {
+    public void sendMail(String to, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setText(text);
         javamailSender.send(message);
-        return "sended";
     }
 }

@@ -14,7 +14,7 @@ public class ExpenseController {
     @Autowired
     private ExpensesService expensesService;
 
-    @GetMapping("get/accountId")
+    @GetMapping("by-accountId")
     public Expense findByAccountId(long accountId){
         return expensesService.findByAccountId(accountId);
     }

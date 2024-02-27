@@ -14,7 +14,7 @@ public class OTPService {
     @Autowired
     private MailSenderService mailSenderService;
 
-    public static String generateOtp() {
+    private static String generateOtp() {
         StringBuilder otp = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < OTP_LENGTH; i++) {
@@ -23,8 +23,9 @@ public class OTPService {
         return otp.toString();
     }
 
-    public void sendByEmail(String to, String otp) {
+    public void sendByEmail(String to) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
+        String otp = generateOtp();
         mailMessage.setTo(to);
         String text = "your code: " + otp;
         mailMessage.setText(text);

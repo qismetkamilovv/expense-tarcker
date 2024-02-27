@@ -1,5 +1,7 @@
 package az.keytd.expensetracker.entities;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +25,7 @@ public class CommonOtps {
     private String otp;
 
     @Column(name = "createdAt")
-    private String createdAt;
+    private LocalDateTime createdAt;
     
     @Column(name = "retryCount")
     private int retryCount;
@@ -55,11 +57,11 @@ public class CommonOtps {
         this.otp = otp;
     }
 
-    public String getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 

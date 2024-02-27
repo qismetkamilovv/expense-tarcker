@@ -24,13 +24,13 @@ public class AccountController {
        return accountsService.findAllByUserId(userId);
     }
 
-    @PutMapping("increase/balance")
+    @PutMapping("increaseBalance")
     public ResponseEntity<Account> increaseBalance(@PathVariable Long id, @PathVariable Double balance){
             accountsService.increaseBalance(id, balance);
             return ResponseEntity.ok().build();
     }
 
-    @PutMapping("decrase/balance")
+    @PutMapping("decraseBalance")
     public ResponseEntity<Account> decraseBalance(@PathVariable Long id, @PathVariable Double balance){
        accountsService.decraseBalance(id, balance);
         return ResponseEntity.ok().build();

@@ -1,5 +1,7 @@
 package az.keytd.expensetracker.entities;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,13 +33,13 @@ public class Expense {
     private Long categoryId;
 
     @Column(name = "expenseDate")
-    private String expenseDate;
+    private LocalDateTime expenseDate;
 
     @Column(name = "createAt")
-    private String createAt;
+    private LocalDateTime createAt;
 
     @Column(name = "uptadedAt")
-    private String uptadedAt;
+    private LocalDateTime uptadedAt;
 
     public Long getId() {
         return id;
@@ -87,27 +89,27 @@ public class Expense {
         this.categoryId = categoryId;
     }
 
-    public String getExpenseDate() {
+    public LocalDateTime getExpenseDate() {
         return expenseDate;
     }
 
-    public void setExpenseDate(String expenseDate) {
+    public void setExpenseDate(LocalDateTime expenseDate) {
         this.expenseDate = expenseDate;
     }
 
-    public String getCreateAt() {
+    public LocalDateTime getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(String createAt) {
+    public void setCreateAt(LocalDateTime createAt) {
         this.createAt = createAt;
     }
 
-    public String getUptadedAt() {
+    public LocalDateTime getUptadedAt() {
         return uptadedAt;
     }
 
-    public void setUptadedAt(String uptadedAt) {
+    public void setUptadedAt(LocalDateTime uptadedAt) {
         this.uptadedAt = uptadedAt;
     }
 
