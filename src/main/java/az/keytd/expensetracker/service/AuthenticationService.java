@@ -9,14 +9,15 @@ import org.springframework.stereotype.Service;
 import az.keytd.expensetracker.dto.LoginRequest;
 import az.keytd.expensetracker.dto.RegisterRequest;
 import az.keytd.expensetracker.dto.Response;
-import az.keytd.expensetracker.entities.User;
+import az.keytd.expensetracker.entities.Users;
+import az.keytd.expensetracker.repository.UsersRepository;
 import az.keytd.expensetracker.security.JwtService;
 
 @Service
 public class AuthenticationService {
 
     @Autowired
-    private UserService userService;
+    private UsersRepository userRepository;
 
     @Autowired
     private JwtService jwtService;
@@ -25,25 +26,26 @@ public class AuthenticationService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private OTPService otpService;
-
-    @Autowired
     private AuthenticationManager authenticationManager;
 
     public Response register(RegisterRequest request) {
-        User user = userService.save(request, passwordEncoder);
+        Users user = new Users();
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setRole(request.getRole());
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        userRepository.save(user);
+
         String token = jwtService.generateToken(user);
-        String otp = otpService.generateOtp();
-        otpService.sendByEmail(user.getEmail(), otp);
-        
+
         return new Response(200, "ok", token);
 
     }
 
-    public Response login(LoginRequest request) {
-        authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-        User user = userService.getByEmail(request.getEmail());
+    public Response login(LoginRequest request){
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        Users user = userRepository.findByEmail(request.getEmail());
         String token = jwtService.generateToken(user);
 
         return new Response(200, "ok", token);

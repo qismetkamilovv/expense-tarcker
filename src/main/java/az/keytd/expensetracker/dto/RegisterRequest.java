@@ -7,21 +7,12 @@ public class RegisterRequest {
 
     private String email;
 
-    private String Role ;
-    
     private String password;
 
+    private String role ;
 
     public String getFirstName() {
         return firstName;
-    }
-
-    public String getRole() {
-        return Role;
-    }
-
-    public void setRole(String role) {
-        Role = role;
     }
 
     public void setFirstName(String firstName) {
@@ -52,5 +43,12 @@ public class RegisterRequest {
         this.password = password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
 }

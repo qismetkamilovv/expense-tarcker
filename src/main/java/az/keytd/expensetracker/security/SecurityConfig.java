@@ -23,13 +23,14 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Autowired
+
     private UserDetailsService userDetailsService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        req -> req.requestMatchers("/auth/**","/mail/**")
+                        req -> req.requestMatchers("/auth/**")
                                 .permitAll()
                                 .requestMatchers("/updateUser").authenticated())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

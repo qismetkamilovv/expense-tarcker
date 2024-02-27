@@ -8,19 +8,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name ="account")
-public class Account {
+@Table
+public class Accounts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name = "id")
-    private Long id;
+    @Column(name="id")
+    private long id ;
 
     @Column(name = "userId")
-    private Long userId;
+    private long userId ;
 
     @Column(name = "name")
-    private String name;
+    private String name ;
 
     @Column(name = "balance")
     private Double balance;
@@ -29,30 +28,30 @@ public class Account {
     private String type;
 
     @Column(name = "status")
-    private String status;
+    private String status ;
 
     @Column(name = "createAt")
     private String createAt;
 
-    @Column(name = "updatedAt")
+    @Column(name= "updatedAt")
     private String updatedAt;
 
     @Column(name = "deletedAt")
-    private String deletedAt;
+    private String deletedAt ;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Long getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 

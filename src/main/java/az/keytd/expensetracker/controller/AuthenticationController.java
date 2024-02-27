@@ -3,7 +3,6 @@ package az.keytd.expensetracker.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,16 +18,14 @@ public class AuthenticationController {
     private AuthenticationService authenticationService;
 
     @PostMapping("register")
-    public ResponseEntity signUp(@RequestBody RegisterRequest request) {
+    public ResponseEntity signUp(RegisterRequest request) {
         Response response = authenticationService.register(request);
         
         return ResponseEntity.ok(response);
     }
 
-
-    @PostMapping("/login")
-    public ResponseEntity signIn(@RequestBody LoginRequest request) {
-
+    @PostMapping("login")
+    public ResponseEntity signIn(LoginRequest request) {
         Response response = authenticationService.login(request);
 
         return ResponseEntity.ok(response);
