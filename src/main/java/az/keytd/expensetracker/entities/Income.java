@@ -13,25 +13,25 @@ public class Income {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "userId")
-    private long userId ;
+    private Long userId;
 
     @Column(name = "title")
     private String title;
 
     @Column(name = "amount")
-    private double amount ;
+    private Double amount;
 
     @Column(name = "accountId")
-    private long accountId ;
+    private Long accountId;
 
     @Column(name = "incomeGroup")
     private String incomeGroup;
 
     @Column(name = "categoryId")
-    private long categoryId ;
+    private Long categoryId;
 
     @Column(name = "incomeDate")
     private String incomeDate;
@@ -42,19 +42,19 @@ public class Income {
     @Column(name = "uptadedAt")
     private String uptadedAt;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -66,19 +66,19 @@ public class Income {
         this.title = title;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
-    public long getAccountId() {
+    public Long getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(long accountId) {
+    public void setAccountId(Long accountId) {
         this.accountId = accountId;
     }
 
@@ -90,11 +90,11 @@ public class Income {
         this.incomeGroup = incomeGroup;
     }
 
-    public long getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(long categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 

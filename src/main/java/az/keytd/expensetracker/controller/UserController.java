@@ -11,31 +11,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import az.keytd.expensetracker.dto.CreateUser;
-import az.keytd.expensetracker.entities.Users;
-import az.keytd.expensetracker.service.UsersService;
+import az.keytd.expensetracker.entities.User;
+import az.keytd.expensetracker.service.UserService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("Users")
-public class UsersController {
+@RequestMapping("users")
+public class UserController {
     @Autowired
-    private UsersService usersService;
+    private UserService usersService;
 
-    @GetMapping("get/allAddress")
-    public List<Users>findAllByAddress(String address){
+    @GetMapping("allAddress")
+    public List<User> findAllByAddress(String address) {
         return usersService.findByAllAddress(address);
     }
 
-    @PutMapping("updateUser")
-    public ResponseEntity<Users>updateData(@PathVariable long id, @RequestBody CreateUser us){
-        Users updatedData = usersService.updateData(id, us);
+    @GetMapping("user/by-email")
+    public Optional<User> findByEmail(String email) {
+        return usersService.findByEmail(email);
+    }
+
+    @PutMapping("user/name")
+    public ResponseEntity<User> updateData(@PathVariable long id, @RequestBody CreateUser us) {
+        User updatedData = usersService.updateData(id, us);
         return ResponseEntity.ok(updatedData);
     }
 
-    @PostMapping("saveUser")
-    public ResponseEntity<String> save(CreateUser newUser){
-        usersService.save(newUser);
-        return ResponseEntity.ok().build();
-    }
 }

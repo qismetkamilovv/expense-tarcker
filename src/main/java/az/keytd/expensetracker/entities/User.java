@@ -15,14 +15,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Users")
-
-public class Users implements UserDetails {
+@Table(name = "Users") 
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "firstName")
     private String firstName;
@@ -52,7 +51,7 @@ public class Users implements UserDetails {
     private String role;
 
     @Column(name = "status")
-    private String status;
+    private Status status;
 
     @Column(name = "createdAt")
     private String createdAt;
@@ -60,11 +59,11 @@ public class Users implements UserDetails {
     @Column(name = "uptadedAt")
     private String uptadedAt;
     
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -140,11 +139,11 @@ public class Users implements UserDetails {
         this.role = role;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

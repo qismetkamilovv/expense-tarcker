@@ -4,9 +4,10 @@ Content-Type:  application/json
 {
     "firstName":"Qismet",
     "lastName": "Kamilov",
-    "email":"qismet600@gmail.com",
+    "email":"kamilov.ismet@gmail.com",
     "role":"Admin",
-    "password": "qismet123",
+    "password": "qismet123"
+
 }
 
 ###
@@ -14,6 +15,9 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-    "mail":"qismet600@gmail.com",
+    "mail":"kamilov.ismet@gmail.com",
     "password": "qismet123"   
 }
+
+###
+GET http://localhost:8080/mail/sendmail?to=kamilovvqismet@gmail.com&text=salamm
