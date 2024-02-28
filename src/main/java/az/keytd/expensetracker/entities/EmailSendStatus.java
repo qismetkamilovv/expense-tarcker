@@ -1,6 +1,6 @@
 package az.keytd.expensetracker.entities;
 
-public enum Status3 {
+public enum EmailSendStatus {
     SENT,
     FAILED;
 }

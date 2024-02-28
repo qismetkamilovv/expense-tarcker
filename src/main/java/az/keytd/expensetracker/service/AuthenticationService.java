@@ -10,6 +10,7 @@ import az.keytd.expensetracker.dto.LoginRequest;
 import az.keytd.expensetracker.dto.RegisterRequest;
 import az.keytd.expensetracker.dto.Response;
 import az.keytd.expensetracker.entities.User;
+import az.keytd.expensetracker.repository.CommonOtpRepository;
 import az.keytd.expensetracker.security.JwtService;
 
 @Service
@@ -25,7 +26,7 @@ public class AuthenticationService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private OTPService otpService;
+    private CommonOtpService otpService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -34,7 +35,6 @@ public class AuthenticationService {
         User user = userService.save(request, passwordEncoder);
         String token = jwtService.generateToken(user);
         otpService.sendByEmail(user.getEmail());
-
         return new Response(200, "ok", token);
 
     }

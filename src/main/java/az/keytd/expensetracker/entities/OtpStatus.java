@@ -1,6 +1,6 @@
 package az.keytd.expensetracker.entities;
 
-public enum Status2 {
+public enum OtpStatus {
     NEW,
     OK,
     FAILED;

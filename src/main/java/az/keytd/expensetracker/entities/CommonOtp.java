@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,7 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "commonOtps")
-public class CommonOtps {
+public class CommonOtp {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 
@@ -29,9 +31,10 @@ public class CommonOtps {
     
     @Column(name = "retryCount")
     private int retryCount;
-
+    
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private Status2 status;
+    private OtpStatus status;
 
     public Long getId() {
         return id;
@@ -73,11 +76,11 @@ public class CommonOtps {
         this.retryCount = retryCount;
     }
 
-    public Status2 getStatus() {
+    public OtpStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status2 status) {
+    public void setStatus(OtpStatus status) {
         this.status = status;
     }
 
