@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import az.keytd.expensetracker.entities.Account;
 import az.keytd.expensetracker.service.AccountService;
 
 @RestController
-@RequestMapping("accounts")
+@RequestMapping("account")
 public class AccountController {
     @Autowired
     private AccountService accountsService ;
@@ -25,13 +26,13 @@ public class AccountController {
     }
 
     @PutMapping("increaseBalance")
-    public ResponseEntity<Account> increaseBalance(@PathVariable Long id, @PathVariable Double balance){
+    public ResponseEntity<Account> increaseBalance(@RequestParam Long id, @RequestParam Double balance){
             accountsService.increaseBalance(id, balance);
             return ResponseEntity.ok().build();
     }
 
     @PutMapping("decraseBalance")
-    public ResponseEntity<Account> decraseBalance(@PathVariable Long id, @PathVariable Double balance){
+    public ResponseEntity<Account> decraseBalance(@RequestParam Long id, @RequestParam Double balance){
        accountsService.decraseBalance(id, balance);
         return ResponseEntity.ok().build();
     }
