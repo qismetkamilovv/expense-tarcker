@@ -8,16 +8,13 @@ import org.springframework.stereotype.Repository;
 import az.keytd.expensetracker.entities.User;
 import java.util.List;
 
-
 @Repository
-public interface UserRepository extends JpaRepository<User,Long>  {
-    
-    Optional<User>findByFirstName(String firstName) ;
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    // TODO return as Optional
-    Optional <User> findByEmail(String email);
+    Optional<User> findByFirstName(String firstName);
 
-    List<User> findAllByAddress (String address);
+    Optional<User> findByEmail(String email);
 
-    
+    List<User> findAllByAddress(String address);
+
 }

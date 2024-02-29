@@ -20,6 +20,7 @@ public class ExpensesService {
         return expensesRepository.findByAccountId(accountId);
     }
 
+    // not userId but accountId
     public void expense(Long userId, Double amount) {
         Expense expense = expensesRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(userId + " not found"));
@@ -28,6 +29,7 @@ public class ExpensesService {
         Double newAmount = currentAmount - amount;
         expense.setAmount(newAmount);
         expensesRepository.save(expense);
+        // when new expense added it means balance in account will be reduced
     }
     // add service to subtract amount and also decrease account balance
 }
