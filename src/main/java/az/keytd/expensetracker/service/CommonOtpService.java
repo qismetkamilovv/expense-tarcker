@@ -55,12 +55,10 @@ public class CommonOtpService {
                 .orElseThrow(() -> new NotFoundException(email + " not found"));
 
         if (commonOtp.getOtp() != otp) {
-            throw new BadRequestException("your otp code is not true");
-
-        } else {
             int count = commonOtp.getRetryCount() + 1;
             commonOtp.setRetryCount(count);
             commonOtpsRepository.save(commonOtp);
+            throw new BadRequestException("your otp code is not true");
         }
         commonOtp.setStatus(OtpStatus.OK);
         commonOtpsRepository.save(commonOtp);
