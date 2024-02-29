@@ -1,5 +1,7 @@
 package az.keytd.expensetracker.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +17,7 @@ public class ExpenseController {
     private ExpensesService expensesService;
 
     @GetMapping("by-accountId")
-    public Expense findByAccountId(long accountId){
+    public Optional<Expense> findByAccountId(long accountId){
         return expensesService.findByAccountId(accountId);
     }
 }
