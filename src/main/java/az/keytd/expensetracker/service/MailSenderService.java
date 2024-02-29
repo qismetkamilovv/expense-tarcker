@@ -23,6 +23,7 @@ public class MailSenderService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setText(text);
+        // TODO: export following save to to another method: save(to, text)
         EmailLog emailLog = new EmailLog();
         emailLog.setRecipient(to);
         emailLog.setSendTimesTamp(LocalDateTime.now());
@@ -30,6 +31,8 @@ public class MailSenderService {
         emailLog.setStatus(EmailSendStatus.SENT);
         emailLog.setType("OTP");
         emailLogsRepository.save(emailLog);
+        //
+
         javamailSender.send(message);
     }
 }

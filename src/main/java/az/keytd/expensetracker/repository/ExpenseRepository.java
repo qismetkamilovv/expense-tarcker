@@ -7,5 +7,6 @@ import az.keytd.expensetracker.entities.Expense;
 
 @Repository
 public interface ExpenseRepository extends JpaRepository<Expense,Long> {
+    // should return optional of Expense
     Expense findByAccountId(long accountId);
 }

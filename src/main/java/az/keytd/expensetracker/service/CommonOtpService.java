@@ -40,6 +40,7 @@ public class CommonOtpService {
         mailMessage.setTo(to);
         String text = "your code: " + otp;
         mailMessage.setText(text);
+        // TODO: export following lines to to another method: save(to, otp)
         CommonOtp commonotp = new CommonOtp();
         commonotp.setOtp(otp);
         commonotp.setEmail(to);
@@ -47,9 +48,12 @@ public class CommonOtpService {
         commonotp.setStatus(OtpStatus.NEW);
         commonotp.setCreatedAt(LocalDateTime.now());
         commonOtpsRepository.save(commonotp);
+        //
         mailSenderService.sendMail(to, text);
     }
 
+    // move this method to AuthSerivce, (qoyun) CommonOTP servicsin ancaq otp-ye aid
+    // sheyler olacaq, her classin oz mesuliyyetleri var
     public void verify(String email, String otp) {
         CommonOtp commonOtp = commonOtpsRepository.findByEmail(email)
                 .orElseThrow(() -> new NotFoundException(email + " not found"));

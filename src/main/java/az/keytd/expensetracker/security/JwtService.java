@@ -15,7 +15,8 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
 
-
+    // extract it to application properties, and you can get it from there using @Value
+    // TODO: study @Value
     private static final String SECRET_KEY = "abcdbabssssgggdgdgdgdgdhdhdsdfdgrtyhutgbfvdcerftgyrhgtvfvfvgvgfvggvhdhdhhdhdhd";
 
 
