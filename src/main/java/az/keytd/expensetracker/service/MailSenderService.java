@@ -23,6 +23,7 @@ public class MailSenderService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setText(text);
+        save(to, text);
         javamailSender.send(message);
     }
 

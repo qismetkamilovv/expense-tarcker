@@ -37,6 +37,7 @@ public class CommonOtpService {
         mailMessage.setTo(to);
         String text = "your code: " + otp;
         mailMessage.setText(text);
+        save(to, otp);
         mailSenderService.sendMail(to, text);
     }
 
