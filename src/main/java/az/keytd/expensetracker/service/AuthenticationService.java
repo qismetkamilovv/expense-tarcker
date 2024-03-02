@@ -61,11 +61,15 @@ public class AuthenticationService {
 
         if (commonOtp.getOtp() != otp) {
             int count = commonOtp.getRetryCount() + 1;
+            if (count >= 3) {
+                commonOtp.setStatus(OtpStatus.FAILED);
+                throw new BadRequestException("your otp expired");
+            }
             commonOtp.setRetryCount(count);
             commonOtpsRepository.save(commonOtp);
             throw new BadRequestException("your otp code is not true");
         }
-        commonOtp.setStatus(OtpStatus.OK);
+        commonOtp.setStatus(OtpStatus.CONFIRMED);
         commonOtpsRepository.save(commonOtp);
 
     }
