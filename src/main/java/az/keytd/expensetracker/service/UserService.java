@@ -6,16 +6,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.List;
-
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import az.keytd.expensetracker.dto.CreateUser;
 import az.keytd.expensetracker.dto.RegisterRequest;
 import az.keytd.expensetracker.entities.User;
+import az.keytd.expensetracker.entities.UserStatus;
 import az.keytd.expensetracker.exceptions.NotFoundException;
 import az.keytd.expensetracker.repository.UserRepository;
 
@@ -32,22 +29,13 @@ public class UserService implements UserDetailsService {
 
     }
 
-    public List<User> findByAllAddress(String address) {
-        return userRepository.findAllByAddress(address);
-    }
-
     public User getByEmail(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new NotFoundException(email + " not found"));
-
-        return userRepository.save(user);
+        return userRepository.getByEmail(email);
     }
 
-    public Optional<User> findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
-    public User updateData(Long id, CreateUser us) {
+    public User updateUser(Long id, CreateUser us) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Data with ID " + id + " not found"));
 
@@ -73,6 +61,7 @@ public class UserService implements UserDetailsService {
         user.setEmail(newUser.getEmail());
         user.setPassword(passwordEncoder.encode(newUser.getPassword()));
         user.setRole(newUser.getRole());
+        user.setStatus(UserStatus.UNCONFIRMED);
         return userRepository.save(user);
     }
 

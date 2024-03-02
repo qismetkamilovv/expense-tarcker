@@ -1,5 +1,6 @@
 package az.keytd.expensetracker.entities;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -9,13 +10,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Users") 
+@Table(name = "Users")
 public class User implements UserDetails {
 
     @Id
@@ -50,15 +53,16 @@ public class User implements UserDetails {
     @Column(name = "role")
     private String role;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private Status status;
+    private UserStatus status;
 
     @Column(name = "createdAt")
-    private String createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "uptadedAt")
-    private String uptadedAt;
-    
+    private LocalDateTime uptadedAt;
+
     public Long getId() {
         return id;
     }
@@ -139,33 +143,33 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public Status getStatus() {
+    public UserStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(UserStatus status) {
         this.status = status;
     }
 
-    public String getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getUptadedAt() {
+    public LocalDateTime getUptadedAt() {
         return uptadedAt;
     }
 
-    public void setUptadedAt(String uptadedAt) {
+    public void setUptadedAt(LocalDateTime uptadedAt) {
         this.uptadedAt = uptadedAt;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-         return Collections.singleton(new SimpleGrantedAuthority(role)) ;
+        return Collections.singleton(new SimpleGrantedAuthority(role));
     }
 
     @Override
@@ -175,12 +179,13 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-       return true;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        ;return true;
+        ;
+        return true;
     }
 
     @Override
@@ -193,5 +198,4 @@ public class User implements UserDetails {
         return true;
     }
 
-   
 }
