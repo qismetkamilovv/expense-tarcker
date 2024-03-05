@@ -22,7 +22,7 @@ public class CommonOtpService {
     @Autowired
     private CommonOtpRepository commonOtpsRepository;
 
-    private static String generateOtp() {
+    public String generateOtp() {
         StringBuilder otp = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < OTP_LENGTH; i++) {
