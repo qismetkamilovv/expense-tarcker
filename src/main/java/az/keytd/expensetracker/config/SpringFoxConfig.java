@@ -1,32 +1,28 @@
 package az.keytd.expensetracker.config;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
-
+@OpenAPIDefinition(info = @Info(title = "Spring Boot API", version = "v1", description = "Documentation of Spring Boot API"),
+        security = @SecurityRequirement(name = "bearerAuth"))
 public class SpringFoxConfig {
     @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("az.keytd.expensetracker"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(apiInfo());
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("Expense-tracker")
-                .description("Your API Description")
-                .version("1.12.3")
-                .build();
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .components(new Components().addSecuritySchemes("bearerAuth",
+                        new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")))
+                .info(new io.swagger.v3.oas.models.info.Info().title("Spring Boot API")
+                        .version("v1")
+                        .description("This is a sample server for Spring Boot service")
+                        .termsOfService("https://swagger.io/terms/")
+                        .license(new License().name("Apache 2.0").url("https://springdoc.org")));
     }
 }
