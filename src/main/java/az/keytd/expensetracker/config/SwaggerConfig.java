@@ -11,17 +11,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@OpenAPIDefinition(info = @Info(title = "Spring Boot API", version = "v1", description = "Documentation of Spring Boot API"),
+@OpenAPIDefinition(info = @Info(title = "Expense-Tracker", version = "v1", description = "Documentation of Spring Boot API"),
         security = @SecurityRequirement(name = "bearerAuth"))
-public class SpringFoxConfig {
+public class SwaggerConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .components(new Components().addSecuritySchemes("bearerAuth",
                         new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")))
-                .info(new io.swagger.v3.oas.models.info.Info().title("Spring Boot API")
+                .info(new io.swagger.v3.oas.models.info.Info().title("Expense-Tracker")
                         .version("v1")
-                        .description("This is a sample server for Spring Boot service")
+                        .description("This is a simple server for Spring Boot service")
                         .termsOfService("https://swagger.io/terms/")
                         .license(new License().name("Apache 2.0").url("https://springdoc.org")));
     }
