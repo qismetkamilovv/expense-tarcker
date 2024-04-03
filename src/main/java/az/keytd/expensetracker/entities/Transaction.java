@@ -7,18 +7,21 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Income")
-public class Income {
+@Table(name = "transaction")
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "userId")
-    private Long userId;
+    @Column(name = "accountId")
+    private Long accountId;
 
     @Column(name = "title")
     private String title;
@@ -26,23 +29,27 @@ public class Income {
     @Column(name = "amount")
     private Double amount;
 
-    @Column(name = "accountId")
-    private Long accountId;
-
-    @Column(name = "incomeGroup")
-    private String incomeGroup;
-
     @Column(name = "categoryId")
     private Long categoryId;
 
-    @Column(name = "incomeDate")
-    private String incomeDate;
+    @Column(name = "transactionDate")
+    private LocalDateTime transactionDate;
+
+    @Column(name = "trnType")
+    private String trnType;
 
     @Column(name = "createAt")
     private LocalDateTime createAt;
 
-    @Column(name = "uptadedAt")
-    private LocalDateTime uptadedAt;
+    @Column(name = "updateAt")
+    private LocalDateTime updateAt;
+
+    @ManyToOne
+    @JoinColumn(name = "accountId")
+    private Account account;
+
+    // @JoinColumn(name = "categoryId")
+    // private ;
 
     public Long getId() {
         return id;
@@ -52,12 +59,12 @@ public class Income {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getAccountId() {
+        return accountId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
     public String getTitle() {
@@ -76,22 +83,6 @@ public class Income {
         this.amount = amount;
     }
 
-    public Long getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
-    }
-
-    public String getIncomeGroup() {
-        return incomeGroup;
-    }
-
-    public void setIncomeGroup(String incomeGroup) {
-        this.incomeGroup = incomeGroup;
-    }
-
     public Long getCategoryId() {
         return categoryId;
     }
@@ -100,12 +91,20 @@ public class Income {
         this.categoryId = categoryId;
     }
 
-    public String getIncomeDate() {
-        return incomeDate;
+    public LocalDateTime getTransactionDate() {
+        return transactionDate;
     }
 
-    public void setIncomeDate(String incomeDate) {
-        this.incomeDate = incomeDate;
+    public void setTransactionDate(LocalDateTime transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public String getTrnType() {
+        return trnType;
+    }
+
+    public void setTrnType(String trnType) {
+        this.trnType = trnType;
     }
 
     public LocalDateTime getCreateAt() {
@@ -116,12 +115,20 @@ public class Income {
         this.createAt = createAt;
     }
 
-    public LocalDateTime getUptadedAt() {
-        return uptadedAt;
+    public LocalDateTime getUpdateAt() {
+        return updateAt;
     }
 
-    public void setUptadedAt(LocalDateTime uptadedAt) {
-        this.uptadedAt = uptadedAt;
+    public void setUpdateAt(LocalDateTime updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
 }

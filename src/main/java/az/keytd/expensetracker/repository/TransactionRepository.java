@@ -5,9 +5,10 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import az.keytd.expensetracker.entities.Expense;
+import az.keytd.expensetracker.entities.Transaction;
 
 @Repository
-public interface ExpenseRepository extends JpaRepository<Expense,Long> {
-   Optional <Expense> findByAccountId(long accountId);
+public interface TransactionRepository extends JpaRepository<Transaction, Long> {
+
+    Optional<Transaction> findByAccountId(Long accountId);
 }
