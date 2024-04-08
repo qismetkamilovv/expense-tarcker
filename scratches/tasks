@@ -2,3 +2,8 @@ learn about enum;
 difference beetwen RequestParam, PathVAriable, RequestBody;
 http path structure;
 send OTP with mail;
+
+
+=================================================================
+manually test your endpoints:
+    create user, and account for that for, add few income/expenses (transactions)

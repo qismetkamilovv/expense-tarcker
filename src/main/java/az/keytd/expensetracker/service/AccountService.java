@@ -11,9 +11,12 @@ import az.keytd.expensetracker.repository.AccountRepository;
 
 @Service
 public class AccountService {
+
     @Autowired
     private AccountRepository accountRepository;
 
+    // TODO: add a mehtod that create account for user.
+    
     public List<Account> findAllByUserId(Long userId) {
 
         return accountRepository.findAllByUserId(userId);

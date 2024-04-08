@@ -35,6 +35,8 @@ public class Transaction {
     @Column(name = "transactionDate")
     private LocalDateTime transactionDate;
 
+    // TODO replace with enum: TransactionType
+    // 2 enums: INCOME, EXPENSE
     @Column(name = "trnType")
     private String trnType;
 

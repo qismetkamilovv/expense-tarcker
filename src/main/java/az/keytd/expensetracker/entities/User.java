@@ -24,7 +24,6 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @OneToMany
     @Column(name = "id")
     private Long id;
@@ -65,6 +64,9 @@ public class User implements UserDetails {
 
     @Column(name = "uptadedAt")
     private LocalDateTime uptadedAt;
+
+    // TODO add relation to Account and to Asset
+    // hint it: OneToMany
 
     public Long getId() {
         return id;

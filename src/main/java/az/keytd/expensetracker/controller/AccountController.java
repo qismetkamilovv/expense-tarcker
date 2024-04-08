@@ -20,6 +20,7 @@ public class AccountController {
     @Autowired
     private AccountService accountsService ;
 
+    // wrong path "{userId}" in path variables
     @GetMapping("UserId")
     public List<Account> findAllByUserId(Long userId){
        return accountsService.findAllByUserId(userId);

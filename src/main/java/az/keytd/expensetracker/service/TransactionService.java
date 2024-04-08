@@ -23,6 +23,7 @@ public class TransactionService {
         return transactionRepository.findByAccountId(accountId);
     }
 
+    // TODO rename to addExpense
     public void decreaseBalance(Long accountId, Double amount) {
         Transaction transaction = transactionRepository.findById(accountId)
                 .orElseThrow(() -> new NotFoundException("account doesn't exist"));
@@ -34,6 +35,7 @@ public class TransactionService {
 
     }
 
+    // TODO rename to addIncome
     public void increaseBalance(Long accountId, Double amount) {
         Transaction transaction = transactionRepository.findById(accountId)
                 .orElseThrow(() -> new NotFoundException("account doesn't exist"));

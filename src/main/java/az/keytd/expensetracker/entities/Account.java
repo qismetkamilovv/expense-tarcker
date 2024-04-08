@@ -13,9 +13,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name ="account")
 public class Account {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id")
     private Long id;
 
@@ -32,6 +32,8 @@ public class Account {
     @Column(name = "type")
     private String type;
 
+    // TODO replace with enum AccountStatus:
+    // for now 2 enums: ACTIVE, INACTIVE
     @Column(name = "status")
     private String status;
 
@@ -43,6 +45,9 @@ public class Account {
 
     @Column(name = "deletedAt")
     private LocalDateTime deletedAt;
+
+    // TODO add relation to User
+    //  hint it will be ManyToOne
 
     public Long getId() {
         return id;
