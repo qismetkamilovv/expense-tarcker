@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import az.keytd.expensetracker.entities.Account;
+import az.keytd.expensetracker.entities.AccountStatus;
 import az.keytd.expensetracker.exceptions.NotFoundException;
 import az.keytd.expensetracker.repository.AccountRepository;
 
@@ -15,8 +16,16 @@ public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-    // TODO: add a mehtod that create account for user.
-    
+    public Account createAccount(String name, Double balance, String type, AccountStatus status) {
+        Account account = new Account();
+        account.setName(name);
+        account.setBalance(balance);
+        account.setType(type);
+        account.setStatus(status);
+        return accountRepository.save(account);
+
+    }
+
     public List<Account> findAllByUserId(Long userId) {
 
         return accountRepository.findAllByUserId(userId);
@@ -29,8 +38,8 @@ public class AccountService {
         Double currentBalance = account.getBalance();
         Double newBalance = currentBalance + balance;
 
-     account.setBalance(newBalance);
-        accountRepository.save (account);
+        account.setBalance(newBalance);
+        accountRepository.save(account);
     }
 
     public void decraseBalance(Long id, Double balance) {

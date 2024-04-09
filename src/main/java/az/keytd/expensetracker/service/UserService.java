@@ -23,6 +23,9 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String firstName) throws UsernameNotFoundException {
         return getByEmail(firstName);
@@ -54,7 +57,7 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public User save(RegisterRequest newUser, PasswordEncoder passwordEncoder) {
+    public User save(RegisterRequest newUser) {
         User user = new User();
         user.setFirstName(newUser.getFirstName());
         user.setLastName(newUser.getLastName());

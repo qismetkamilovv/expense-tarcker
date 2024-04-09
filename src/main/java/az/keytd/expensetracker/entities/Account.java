@@ -32,10 +32,8 @@ public class Account {
     @Column(name = "type")
     private String type;
 
-    // TODO replace with enum AccountStatus:
-    // for now 2 enums: ACTIVE, INACTIVE
     @Column(name = "status")
-    private String status;
+    private AccountStatus status;
 
     @Column(name = "createAt")
     private LocalDateTime createAt;
@@ -89,11 +87,11 @@ public class Account {
         this.type = type;
     }
 
-    public String getStatus() {
+    public AccountStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(AccountStatus status) {
         this.status = status;
     }
 

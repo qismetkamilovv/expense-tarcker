@@ -15,16 +15,15 @@ public class TransactionService {
     @Autowired
     private TransactionRepository transactionRepository;
 
-    public List<Transaction> getAll(){
-        return transactionRepository.findAll();
+    public List<Transaction> getByAllAccountId() {
+        return transactionRepository.getAllByAccountId();
     }
 
     public Optional<Transaction> findbyAccountId(Long accountId) {
         return transactionRepository.findByAccountId(accountId);
     }
 
-    // TODO rename to addExpense
-    public void decreaseBalance(Long accountId, Double amount) {
+    public void addExpense(Long accountId, Double amount) {
         Transaction transaction = transactionRepository.findById(accountId)
                 .orElseThrow(() -> new NotFoundException("account doesn't exist"));
 
@@ -35,8 +34,7 @@ public class TransactionService {
 
     }
 
-    // TODO rename to addIncome
-    public void increaseBalance(Long accountId, Double amount) {
+    public void addIncome(Long accountId, Double amount) {
         Transaction transaction = transactionRepository.findById(accountId)
                 .orElseThrow(() -> new NotFoundException("account doesn't exist"));
 

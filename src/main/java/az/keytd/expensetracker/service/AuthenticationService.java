@@ -39,7 +39,7 @@ public class AuthenticationService {
     private CommonOtpRepository commonOtpsRepository;
 
     public Response register(RegisterRequest request) {
-        User user = userService.save(request, passwordEncoder);
+        User user = userService.save(request);
         String token = jwtService.generateToken(user);
         otpService.sendByEmail(user.getEmail());
         return new Response(200, "ok", token);

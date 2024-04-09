@@ -25,10 +25,8 @@ public class UserController {
     @Autowired
     private UserService usersService;
 
-    // TODO: delete "user" prefix you already have "user" above class
-    // currently it would be like "/user/user/email"
     @Operation(summary = "Get user by email")
-    @GetMapping("user/email")
+    @GetMapping("email")
     public User getByEmail(@RequestParam String email) {
         return usersService.getByEmail(email);
     }
@@ -40,11 +38,10 @@ public class UserController {
         return ResponseEntity.ok(updatedData);
     }
 
-    // following method is wrong you dont get PasswordEncoder in input. think and fix it
     @Operation(summary = "Save new user")
     @PostMapping("user/save")
     public ResponseEntity<User> save(RegisterRequest newUser, PasswordEncoder passwordEncoder) {
-        usersService.save(newUser, passwordEncoder);
+        usersService.save(newUser);
         return ResponseEntity.ok().build();
     }
 

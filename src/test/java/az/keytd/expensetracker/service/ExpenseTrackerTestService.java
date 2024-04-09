@@ -66,7 +66,7 @@ public class ExpenseTrackerTestService {
 
         String token = "token";
 
-        when(userService.save(registerRequest, passwordEncoder)).thenReturn(user);
+        when(userService.save(registerRequest)).thenReturn(user);
 
         when(jwtService.generateToken(user)).thenReturn(token);
 
