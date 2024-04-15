@@ -25,12 +25,14 @@ public class UserController {
     @Autowired
     private UserService usersService;
 
+    //TODO unnecessary, instead get user by ID 
     @Operation(summary = "Get user by email")
-    @GetMapping("email")
+    @GetMapping("email") // @GetMapping("{id}"), final path would be {{baseUrl}}/user/{id}
     public User getByEmail(@RequestParam String email) {
         return usersService.getByEmail(email);
     }
 
+    // TODO: since you get ID from path variable you have to specify it in path like @PutMapping("updateUser/{id}")
     @Operation(summary = "Update user")
     @PutMapping("updateUser")
     public ResponseEntity<User> updateUser(@PathVariable long id, @RequestBody CreateUser us) {
@@ -38,9 +40,12 @@ public class UserController {
         return ResponseEntity.ok(updatedData);
     }
 
+
+    // TODO in here "user" prefix in is not needed because end path would be {{baseUrl}}/user/user/save
+    // if you want to create save method for user just simple put empty path @PostMapping() and full path would be: POST {{baseUrl}}/user
     @Operation(summary = "Save new user")
     @PostMapping("user/save")
-    public ResponseEntity<User> save(RegisterRequest newUser, PasswordEncoder passwordEncoder) {
+    public ResponseEntity<User> save(RegisterRequest newUser, PasswordEncoder passwordEncoder) { // you are NOT using passwordEncoder; remove it
         usersService.save(newUser);
         return ResponseEntity.ok().build();
     }

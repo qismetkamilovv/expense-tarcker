@@ -20,10 +20,12 @@ public class TransactionService {
     }
 
     public Optional<Transaction> findbyAccountId(Long accountId) {
+        // handle case where no transaction exists
         return transactionRepository.findByAccountId(accountId);
     }
 
     public void addExpense(Long accountId, Double amount) {
+        // extract to separate method
         Transaction transaction = transactionRepository.findById(accountId)
                 .orElseThrow(() -> new NotFoundException("account doesn't exist"));
 

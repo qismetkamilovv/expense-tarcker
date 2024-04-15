@@ -22,6 +22,7 @@ public class AccountController {
     @Autowired
     private AccountService accountsService ;
 
+    // TODO better path  @GetMapping("userId")
     @GetMapping("User")
     public List<Account> findAllByUserId(Long userId){
        return accountsService.findAllByUserId(userId);

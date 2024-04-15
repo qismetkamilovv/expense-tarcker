@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import az.keytd.expensetracker.service.MailSenderService;
 
+// Unnecessary controller, remove it
 @RestController
 @RequestMapping("mail")
 public class MailSenderController {

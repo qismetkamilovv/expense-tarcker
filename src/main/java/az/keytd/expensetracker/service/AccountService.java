@@ -27,11 +27,12 @@ public class AccountService {
     }
 
     public List<Account> findAllByUserId(Long userId) {
-
+        //TODO handle case where User do NOT have account yet: hint return not found
         return accountRepository.findAllByUserId(userId);
     }
 
     public void increaseBalance(Long id, Double balance) {
+        // TODO extract following to seperate method since you already using in multiple places
         Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Data with ID " + id + " not found"));
 

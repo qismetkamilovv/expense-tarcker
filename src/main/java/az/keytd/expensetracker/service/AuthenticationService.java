@@ -26,6 +26,7 @@ public class AuthenticationService {
     @Autowired
     private JwtService jwtService;
 
+    // remove
     @Autowired
     private PasswordEncoder passwordEncoder;
 
