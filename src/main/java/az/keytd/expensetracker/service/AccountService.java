@@ -27,7 +27,7 @@ public class AccountService {
     }
 
     public List<Account> findAllByUserId(Long userId) {
-        //TODO handle case where User do NOT have account yet: hint return not found
+        
         return accountRepository.findAllByUserId(userId);
     }
 

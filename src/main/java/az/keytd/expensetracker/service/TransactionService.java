@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import az.keytd.expensetracker.entities.Account;
 import az.keytd.expensetracker.entities.Transaction;
 import az.keytd.expensetracker.exceptions.NotFoundException;
 import az.keytd.expensetracker.repository.TransactionRepository;
@@ -19,9 +20,11 @@ public class TransactionService {
         return transactionRepository.getAllByAccountId();
     }
 
-    public Optional<Transaction> findbyAccountId(Long accountId) {
+    public Transaction findbyAccountId(Long accountId) {
         // handle case where no transaction exists
-        return transactionRepository.findByAccountId(accountId);
+        Transaction transaction = transactionRepository.findByAccountId(accountId).
+                    orElseThrow(()-> new NotFoundException(accountId + "is doesnt exist"));
+        return transaction;
     }
 
     public void addExpense(Long accountId, Double amount) {

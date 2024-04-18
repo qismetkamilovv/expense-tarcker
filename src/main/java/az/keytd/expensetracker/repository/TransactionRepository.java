@@ -11,7 +11,7 @@ import az.keytd.expensetracker.entities.Transaction;
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
-    Optional<Transaction> findByAccountId(Long accountId);
+   Optional<Transaction> findByAccountId(Long accountId);
 
     List<Transaction> getAllByAccountId();
 }

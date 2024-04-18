@@ -35,10 +35,8 @@ public class Transaction {
     @Column(name = "transactionDate")
     private LocalDateTime transactionDate;
 
-    // TODO replace with enum: TransactionType
-    // 2 enums: INCOME, EXPENSE
     @Column(name = "trnType")
-    private String trnType;
+    private TransactionType trnType;
 
     @Column(name = "createAt")
     private LocalDateTime createAt;
@@ -101,11 +99,11 @@ public class Transaction {
         this.transactionDate = transactionDate;
     }
 
-    public String getTrnType() {
+    public TransactionType getTrnType() {
         return trnType;
     }
 
-    public void setTrnType(String trnType) {
+    public void setTrnType(TransactionType trnType) {
         this.trnType = trnType;
     }
 
