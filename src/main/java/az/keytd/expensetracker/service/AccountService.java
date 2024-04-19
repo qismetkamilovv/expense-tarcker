@@ -27,7 +27,7 @@ public class AccountService {
     }
 
     public List<Account> findAllByUserId(Long userId) {
-        
+        // ifle yoxla
         return accountRepository.findAllByUserId(userId);
     }
 

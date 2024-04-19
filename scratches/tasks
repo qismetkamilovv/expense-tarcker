@@ -7,3 +7,5 @@ send OTP with mail;
 =================================================================
 manually test your endpoints:
     create user, and account for that for, add few income/expenses (transactions)
+
+hashcode, equals, toString read about these methods;

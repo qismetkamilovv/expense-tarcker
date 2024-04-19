@@ -3,7 +3,9 @@ package az.keytd.expensetracker.entities;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
+import org.hibernate.mapping.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -65,8 +67,9 @@ public class User implements UserDetails {
     @Column(name = "uptadedAt")
     private LocalDateTime uptadedAt;
 
-    // TODO add relation to Account and to Asset
-    // hint it: OneToMany
+    @OneToMany
+    private Set<Account> account ;
+    
 
     public Long getId() {
         return id;
