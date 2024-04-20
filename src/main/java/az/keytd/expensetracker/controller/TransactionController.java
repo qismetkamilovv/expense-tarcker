@@ -26,11 +26,6 @@ public class TransactionController {
         return transactionService.getByAllAccountId();
     }
 
-    @GetMapping("accountId")
-    public Transaction findbyAccountId(@PathVariable Long accountId) {
-        return transactionService.findbyAccountId(accountId);
-    }
-
     @PostMapping("income")
     public ResponseEntity<Transaction> increaseBalance(@PathVariable Long accountId, @RequestParam Double amount) { 
         transactionService.addIncome(accountId, amount);

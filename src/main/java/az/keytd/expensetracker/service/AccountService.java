@@ -16,6 +16,12 @@ public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
+    public Account findById(Long id) {
+        Account account = accountRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Data with ID " + id + " not found"));
+        return account;
+    }
+
     public Account createAccount(String name, Double balance, String type, AccountStatus status) {
         Account account = new Account();
         account.setName(name);
@@ -27,15 +33,16 @@ public class AccountService {
     }
 
     public List<Account> findAllByUserId(Long userId) {
-        // ifle yoxla
-        return accountRepository.findAllByUserId(userId);
+        List<Account> accounts = accountRepository.findAllByUserId(userId);
+        if (accounts.isEmpty()) {
+            throw new NotFoundException("doesnt exist");
+        } else {
+            return accounts;
+        }
     }
 
     public void increaseBalance(Long id, Double balance) {
-        // TODO extract following to seperate method since you already using in multiple places
-        Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Data with ID " + id + " not found"));
-
+        Account account = findById(id);
         Double currentBalance = account.getBalance();
         Double newBalance = currentBalance + balance;
 
@@ -44,9 +51,7 @@ public class AccountService {
     }
 
     public void decraseBalance(Long id, Double balance) {
-        Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Data with ID " + id + " not found"));
-
+        Account account = findById(id);
         Double currentBalance = account.getBalance();
         Double newBalance = currentBalance + balance;
 

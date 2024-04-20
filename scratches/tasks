@@ -9,3 +9,5 @@ manually test your endpoints:
     create user, and account for that for, add few income/expenses (transactions)
 
 hashcode, equals, toString read about these methods;
+Read about spring boot bean scope;
+read about java string class;

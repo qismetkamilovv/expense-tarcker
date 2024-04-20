@@ -1,12 +1,10 @@
 package az.keytd.expensetracker.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import az.keytd.expensetracker.entities.Account;
 import az.keytd.expensetracker.entities.Transaction;
 import az.keytd.expensetracker.exceptions.NotFoundException;
 import az.keytd.expensetracker.repository.TransactionRepository;
@@ -20,18 +18,20 @@ public class TransactionService {
         return transactionRepository.getAllByAccountId();
     }
 
+    public Transaction findById(Long accountId) {
+        Transaction transaction = transactionRepository.findById(accountId)
+                .orElseThrow(() -> new NotFoundException("account doesn't exist"));
+        return transaction;
+    }
+
     public Transaction findbyAccountId(Long accountId) {
-        // handle case where no transaction exists
-        Transaction transaction = transactionRepository.findByAccountId(accountId).
-                    orElseThrow(()-> new NotFoundException(accountId + "is doesnt exist"));
+        Transaction transaction = transactionRepository.findByAccountId(accountId)
+                .orElseThrow(() -> new NotFoundException(accountId + "is doesnt exist"));
         return transaction;
     }
 
     public void addExpense(Long accountId, Double amount) {
-        // extract to separate method
-        Transaction transaction = transactionRepository.findById(accountId)
-                .orElseThrow(() -> new NotFoundException("account doesn't exist"));
-
+        Transaction transaction = findById(accountId);
         Double currentAmount = transaction.getAmount();
         Double newAmount = currentAmount - amount;
         transaction.setAmount(newAmount);
@@ -40,9 +40,7 @@ public class TransactionService {
     }
 
     public void addIncome(Long accountId, Double amount) {
-        Transaction transaction = transactionRepository.findById(accountId)
-                .orElseThrow(() -> new NotFoundException("account doesn't exist"));
-
+        Transaction transaction = findById(accountId);
         Double currentAmount = transaction.getAmount();
         Double newAmount = currentAmount + amount;
         transaction.setAmount(newAmount);
