@@ -13,7 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Asset")
+@Table(name = "Assets")
 public class Asset {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class Asset {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "assetType")
+    @Column(name = "asset_type")
     private String assetType;
 
     @Column(name = "name")
@@ -30,17 +30,14 @@ public class Asset {
     @Column(name = "value")
     private DecimalFormat value;
 
-    @Column(name = "acquisitionDate")
+    @Column(name = "acquisition_date")
     private LocalDateTime acquisitionDate;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "ownerId")
-    private Long ownerId;
-
     @ManyToOne
-    @JoinColumn(name = "ownerId")
+    @JoinColumn(name = "owner_id")
     private User user; 
 
     
@@ -90,14 +87,6 @@ public class Asset {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Long getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
     }
 
     public User getUser() {

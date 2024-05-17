@@ -3,6 +3,7 @@ package az.keytd.expensetracker.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import az.keytd.expensetracker.dto.LoginRequest;
@@ -34,8 +35,12 @@ public class AuthenticationService {
     @Autowired
     private CommonOtpRepository commonOtpsRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public Response register(RegisterRequest request) {
-        User user = userService.save(request);
+        String encodedPassword = passwordEncoder.encode(request.getPassword());
+        User user = userService.save(request, encodedPassword);
         String token = jwtService.generateToken(user);
         otpService.sendByEmail(user.getEmail());
         return new Response(200, "ok", token);

@@ -8,6 +8,24 @@ send OTP with mail;
 manually test your endpoints:
     create user, and account for that for, add few income/expenses (transactions)
 
-hashcode, equals, toString read about these methods;
+=========================== for review
+hashCode - https://www.baeldung.com/java-hashcode;
+
+hashcode, equals, toString read about these methods; 
+
+Singleton design pattern;
+
+read about java string class - http s://www.programiz.com/java-programming/string ; 
+
+SOLID principles;
+
 Read about spring boot bean scope;
-read about java string class;
+
+==========================
+Entitydeki tablelarin  adi cem ,columnlar undersscore;
+read about stack and queue;
+=============================
+spring inversion of control
+dependency injection of control
+@service,@component,@repository deferences between this
+spring jpa drived methods

@@ -26,14 +26,14 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @OneToMany
+
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "email")
@@ -61,15 +61,14 @@ public class User implements UserDetails {
     @Column(name = "status")
     private UserStatus status;
 
-    @Column(name = "createdAt")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "uptadedAt")
+    @Column(name = "uptaded_at")
     private LocalDateTime uptadedAt;
 
-    @OneToMany
-    private Set<Account> account ;
-    
+    @OneToMany(mappedBy = "user")
+    private Set<Account> account;
 
     public Long getId() {
         return id;

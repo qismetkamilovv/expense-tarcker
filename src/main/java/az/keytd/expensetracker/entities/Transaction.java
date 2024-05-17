@@ -20,32 +20,29 @@ public class Transaction {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "accountId")
-    private Long accountId;
-
     @Column(name = "title")
     private String title;
 
     @Column(name = "amount")
     private Double amount;
 
-    @Column(name = "categoryId")
+    @Column(name = "category_id")
     private Long categoryId;
 
-    @Column(name = "transactionDate")
+    @Column(name = "transaction_date")
     private LocalDateTime transactionDate;
 
-    @Column(name = "trnType")
+    @Column(name = "trn_type")
     private TransactionType trnType;
 
-    @Column(name = "createAt")
+    @Column(name = "create_at")
     private LocalDateTime createAt;
 
-    @Column(name = "updateAt")
+    @Column(name = "update_at")
     private LocalDateTime updateAt;
 
     @ManyToOne
-    @JoinColumn(name = "accountId")
+    @JoinColumn(name = "account_id")
     private Account account;
 
     // @JoinColumn(name = "categoryId")
@@ -57,14 +54,6 @@ public class Transaction {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
     }
 
     public String getTitle() {

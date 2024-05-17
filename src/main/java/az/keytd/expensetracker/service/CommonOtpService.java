@@ -20,7 +20,7 @@ public class CommonOtpService {
     private MailSenderService mailSenderService;
 
     @Autowired
-    private CommonOtpRepository commonOtpsRepository;
+    private CommonOtpRepository commonOtpsRepository;  
 
     public String generateOtp() {
         StringBuilder otp = new StringBuilder();
