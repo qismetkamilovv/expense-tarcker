@@ -29,9 +29,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        req -> req.requestMatchers("/auth/**","/mail/**", "/v1/**")
+                        req -> req
+                                .requestMatchers("/auth/**", "/mail/**", "/v1/**", "/account/increaseBalance",
+                                        "/account/decraseBalance",
+                                        "/account/create", "/transaction/income", "/transaction/expense",
+                                        "/transaction/between-dates", "/transaction/transactions/export", "/user/save")
                                 .permitAll()
-                                .requestMatchers("/updateUser").authenticated())
+                                .requestMatchers("/user/updateUser", "/user/get-email").authenticated())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .build();

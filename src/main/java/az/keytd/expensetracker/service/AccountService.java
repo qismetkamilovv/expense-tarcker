@@ -53,7 +53,7 @@ public class AccountService {
     public void decraseBalance(Long id, Double balance) {
         Account account = findById(id);
         Double currentBalance = account.getBalance();
-        Double newBalance = currentBalance + balance;
+        Double newBalance = currentBalance - balance;
 
         account.setBalance(newBalance);
         accountRepository.save(account);

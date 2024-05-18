@@ -21,7 +21,7 @@ Content-Type: application/json
 
 
 ###
-POST http://localhost:8080/user/user/save
+POST http://localhost:8080/user/save
 Content-Type: application/json
 
 {
@@ -30,7 +30,7 @@ Content-Type: application/json
     "email":"muradovafidan@gmail.com",
     "password":"fidan123",
     "role":"User",
-    "status":"Active"
+    "status":"ACTIVE"
 }
 
 ###
@@ -57,31 +57,14 @@ Content-Type: application/json
 PUT http://localhost:8080/account/increaseBalance?id=1&balance=15
 
 ###
-POST http://localhost:8080/account/create?name=Qismet&balance=250&type=user&status=active
+POST http://localhost:8080/account/create?name=Ismet&balance=2250&type=user&status=ACTIVE
 
 
 ###
-PUT http://localhost:8080/account/decraseBalance?id=1&balance=15
-
-
-###
-PUT http://localhost:8080/Expense/new-expense?accountId=1&amount=15
-
-
-###
-GET http://localhost:8080/income/all
-
-
-###
-PUT http://localhost:8080/income/income/add?userId=1&amount=20
-
+PUT http://localhost:8080/account/decraseBalance?id=2&balance=1200
 
 ###
 GET http://localhost:8080/user/user/email?email=qismet600@gmail.com
-
-
-###
-GET http://localhost:8080/mail/sendmail?to=kamilovvqismet@gmail.com&text=salamm
 
 ###
 GET http://localhost:8080/transactions/1

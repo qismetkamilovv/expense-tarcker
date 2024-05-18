@@ -21,24 +21,24 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("user")
 public class UserController {
     @Autowired
-    private UserService usersService;
+    private UserService userService;
 
 
     @GetMapping("get-email")
     public User getByEmail(String email){
-        return usersService.getByEmail(email);
+        return userService.getByEmail(email);
     }
 
     @PostMapping("save")
     public ResponseEntity<User> save (RegisterRequest newUser, String encodedPassword){
-        User save = usersService.save(newUser, encodedPassword);
+        User save = userService.save(newUser, encodedPassword);
         return ResponseEntity.ok(save);
     }
 
     @Operation(summary = "Update user")
     @PutMapping("updateUser{id}")
     public ResponseEntity<User> updateUser(@PathVariable long id, @RequestBody CreateUser us) {
-        User updatedData = usersService.updateUser(id, us);
+        User updatedData = userService.updateUser(id, us);
         return ResponseEntity.ok(updatedData);
     }
 

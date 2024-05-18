@@ -19,28 +19,28 @@ import az.keytd.expensetracker.service.AccountService;
 @RequestMapping("account")
 public class AccountController {
     @Autowired
-    private AccountService accountsService ;
+    private AccountService accountsService;
 
-    
     @GetMapping("userId")
-    public List<Account> findAllByUserId(Long userId){
-       return accountsService.findAllByUserId(userId);
+    public List<Account> findAllByUserId(Long userId) {
+        return accountsService.findAllByUserId(userId);
     }
 
     @PutMapping("increaseBalance")
-    public ResponseEntity<Account> increaseBalance(@RequestParam Long id, @RequestParam Double balance){
-            accountsService.increaseBalance(id, balance);
-            return ResponseEntity.ok().build();
+    public ResponseEntity<Account> increaseBalance(@RequestParam Long id, @RequestParam Double balance) {
+        accountsService.increaseBalance(id, balance);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("decraseBalance")
-    public ResponseEntity<Account> decraseBalance(@RequestParam Long id, @RequestParam Double balance){
-       accountsService.decraseBalance(id, balance);
+    public ResponseEntity<Account> decraseBalance(@RequestParam Long id, @RequestParam Double balance) {
+        accountsService.decraseBalance(id, balance);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("create")
-    public Account createAccount(String name, Double balance, String type, AccountStatus status){
+    public Account createAccount(@RequestParam String name, @RequestParam Double balance, @RequestParam String type,
+            @RequestParam AccountStatus status) {
         return accountsService.createAccount(name, balance, type, status);
     }
 
