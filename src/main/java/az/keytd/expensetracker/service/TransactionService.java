@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.time.format.DateTimeFormatter;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import az.keytd.expensetracker.entities.Transaction;
@@ -60,9 +62,8 @@ public class TransactionService {
         return transactionRepository.findAllByTransactionDateBetween(fromTime, toTime);
     }
 
-    public void getBetweenReportExcel( LocalDate from, LocalDate to)
-            throws IOException {
-                List<Transaction> transactions = this.getBetween(from, to);
+    public byte[] getBetweenReportExcel(LocalDate from, LocalDate to) throws IOException {
+        List<Transaction> transactions = this.getBetween(from, to);
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Transactions");
 
@@ -79,21 +80,22 @@ public class TransactionService {
         for (Transaction transaction : transactions) {
             Row row = sheet.createRow(rowNum++);
             row.createCell(0).setCellValue(transaction.getId());
-            row.createCell(2).setCellValue(transaction.getTitle());
-            row.createCell(3).setCellValue(transaction.getAmount());
-            row.createCell(4).setCellValue(transaction.getCategoryId());
-            row.createCell(5).setCellValue(transaction.getTransactionDate().format(formatter));
-            row.createCell(6).setCellValue(transaction.getTrnType().toString());
-            row.createCell(7).setCellValue(transaction.getCreateAt().format(formatter));
-            row.createCell(8).setCellValue(transaction.getUpdateAt().format(formatter));
+            row.createCell(1).setCellValue(transaction.getTitle());
+            row.createCell(2).setCellValue(transaction.getAmount());
+            row.createCell(3).setCellValue(transaction.getCategoryId());
+            row.createCell(4).setCellValue(transaction.getTransactionDate().format(formatter));
+            row.createCell(5).setCellValue(transaction.getTrnType().toString());
+            row.createCell(6).setCellValue(transaction.getCreateAt().format(formatter));
+            row.createCell(7).setCellValue(transaction.getUpdateAt().format(formatter));
         }
 
-        // try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
-        //     workbook.write(outputStream);
-        // }
-
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        workbook.write(outputStream);
         workbook.close();
+        
+        return outputStream.toByteArray();
     }
+
 
     // TODO create method that returns list of transactions beetwen dates ;
     // TODO method name is getBetween(LocalDate from, LocalDate to);
