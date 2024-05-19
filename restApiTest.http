@@ -5,10 +5,11 @@ Content-Type:  application/json
     "firstName":"Qismet",
     "lastName": "Kamilov",
     "email":"kamilovvqismet@gmail.com",
-    "role":"Admin",
+    "role":"ADMIN",
     "password": "qismet123"
 
 }
+
 
 ###
 POST http://localhost:8080/auth/login

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import az.keytd.expensetracker.dto.CreateUser;
 import az.keytd.expensetracker.dto.RegisterRequest;
@@ -23,20 +24,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
+    // TODO rename the path to byEmail
     @GetMapping("get-email")
-    public User getByEmail(String email){
+    public User getByEmail(@RequestParam String email){
         return userService.getByEmail(email);
     }
 
-    @PostMapping("save")
-    public ResponseEntity<User> save (RegisterRequest newUser, String encodedPassword){
-        User save = userService.save(newUser, encodedPassword);
-        return ResponseEntity.ok(save);
-    }
-
     @Operation(summary = "Update user")
-    @PutMapping("updateUser{id}")
+    @PutMapping("{id}")
     public ResponseEntity<User> updateUser(@PathVariable long id, @RequestBody CreateUser us) {
         User updatedData = userService.updateUser(id, us);
         return ResponseEntity.ok(updatedData);

@@ -29,6 +29,7 @@ public class Transaction {
     @Column(name = "category_id")
     private Long categoryId;
 
+    //TODO change the type LocalDate
     @Column(name = "transaction_date")
     private LocalDateTime transactionDate;
 

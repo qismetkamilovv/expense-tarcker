@@ -33,9 +33,6 @@ public class AuthenticationService {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private CommonOtpRepository commonOtpsRepository;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public Response register(RegisterRequest request) {
@@ -57,21 +54,8 @@ public class AuthenticationService {
     }
 
     public void verify(String email, String otp) {
-        CommonOtp commonOtp = commonOtpsRepository.findByEmail(email)
-                .orElseThrow(() -> new NotFoundException(email + " not found"));
-
-        if (commonOtp.getOtp() != otp) {
-            int count = commonOtp.getRetryCount() + 1;
-            if (count >= 3) {
-                commonOtp.setStatus(OtpStatus.FAILED);
-                throw new BadRequestException("your otp expired");
-            }
-            commonOtp.setRetryCount(count);
-            commonOtpsRepository.save(commonOtp);
-            throw new BadRequestException("your otp code is not true");
-        }
-        commonOtp.setStatus(OtpStatus.CONFIRMED);
-        commonOtpsRepository.save(commonOtp);
+        otpService.checkOTP(email, otp);
+        userService.verify(email);
 
     }
 }

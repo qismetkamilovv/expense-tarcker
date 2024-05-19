@@ -14,7 +14,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import az.keytd.expensetracker.entities.Account;
 import az.keytd.expensetracker.entities.Transaction;
+import az.keytd.expensetracker.entities.TransactionType;
 import az.keytd.expensetracker.exceptions.NotFoundException;
 import az.keytd.expensetracker.repository.TransactionRepository;
 import java.io.IOException;
@@ -24,26 +27,41 @@ public class TransactionService {
     @Autowired
     private TransactionRepository transactionRepository;
 
+    @Autowired
+    private AccountService accountService;
 
+    // TODO change accountId to id
     public Transaction findById(Long accountId) {
         Transaction transaction = transactionRepository.findById(accountId)
-                .orElseThrow(() -> new NotFoundException("account doesn't exist"));
+                .orElseThrow(() -> new NotFoundException("transaction doesn't exist"));
         return transaction;
     }
 
     public List<Transaction> getAllByAccountId(Long accountId) {
-        List<Transaction> transaction = transactionRepository.findAllByAccountId(accountId) ;
-        if(transaction.isEmpty()){
+        List<Transaction> transaction = transactionRepository.findAllByAccountId(accountId);
+        if (transaction.isEmpty()) {
             throw new NotFoundException(accountId + "is doesnt exist");
         }
         return transaction;
     }
 
+    // TODO create TransactionRequest dto for amount categoryid title trnsactiondate
+    // anda accountid from pathvariable
+
+    // TODO method return should transactionEntity
     public void addExpense(Long accountId, Double amount) {
-        Transaction transaction = findById(accountId);
-        Double currentAmount = transaction.getAmount();
-        Double newAmount = currentAmount - amount;
-        transaction.setAmount(newAmount);
+        Account account = accountService.decraseBalance(accountId, amount);
+        Transaction transaction = new Transaction();
+        transaction.setAccount(account);
+        transaction.setAmount(amount);
+        // TODO request categoryid from input
+        transaction.setCategoryId(0L);
+        // TODO request title from the input
+        transaction.setTitle(null);
+        // Todo request date from input
+        transaction.setTransactionDate(null);
+        transaction.setTrnType(TransactionType.EXPENSE);
+        transaction.setCreateAt(LocalDateTime.now());
         transactionRepository.save(transaction);
 
     }
@@ -92,10 +110,9 @@ public class TransactionService {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         workbook.write(outputStream);
         workbook.close();
-        
+
         return outputStream.toByteArray();
     }
-
 
     // TODO create method that returns list of transactions beetwen dates ;
     // TODO method name is getBetween(LocalDate from, LocalDate to);

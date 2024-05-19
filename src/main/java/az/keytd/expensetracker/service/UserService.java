@@ -60,8 +60,15 @@ public class UserService implements UserDetailsService {
         user.setEmail(newUser.getEmail());
         user.setPassword(encodedPassword);
         user.setRole(newUser.getRole());
-        user.setStatus(UserStatus.UNCONFIRMED);
+        user.setStatus(UserStatus.UNVERIFIED);
         return userRepository.save(user);
+    }
+
+    public User verify(String email) {
+        User user = getByEmail(email);
+        user.setStatus(UserStatus.VERIFIED);
+        return userRepository.save(user);
+
     }
 
 }
