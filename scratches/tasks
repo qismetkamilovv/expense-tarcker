@@ -25,7 +25,9 @@ Read about spring boot bean scope;
 Entitydeki tablelarin  adi cem ,columnlar undersscore;
 read about stack and queue;
 =============================
-spring inversion of control
-dependency injection of control
 @service,@component,@repository deferences between this
 spring jpa drived methods
+========================
+spring inversion of control
+dependency injection 
+<this super> what does this keywords do
