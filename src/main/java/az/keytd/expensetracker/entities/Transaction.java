@@ -1,6 +1,8 @@
 package az.keytd.expensetracker.entities;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,7 +33,7 @@ public class Transaction {
 
     //TODO change the type LocalDate
     @Column(name = "transaction_date")
-    private LocalDateTime transactionDate;
+    private LocalDate transactionDate;
 
     @Column(name = "trn_type")
     private TransactionType trnType;
@@ -81,11 +83,11 @@ public class Transaction {
         this.categoryId = categoryId;
     }
 
-    public LocalDateTime getTransactionDate() {
+    public LocalDate getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(LocalDateTime transactionDate) {
+    public void setTransactionDate(LocalDate transactionDate) {
         this.transactionDate = transactionDate;
     }
 

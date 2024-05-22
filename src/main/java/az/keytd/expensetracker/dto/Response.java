@@ -1,6 +1,5 @@
 package az.keytd.expensetracker.dto;
 
-// TODO: utilize Generic types for data var.
 public class Response {
     private int status;
     private String message;

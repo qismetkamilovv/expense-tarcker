@@ -24,8 +24,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // TODO rename the path to byEmail
-    @GetMapping("get-email")
+    @GetMapping("byEmail")
     public User getByEmail(@RequestParam String email){
         return userService.getByEmail(email);
     }

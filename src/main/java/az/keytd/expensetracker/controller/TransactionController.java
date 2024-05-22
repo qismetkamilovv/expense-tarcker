@@ -13,10 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import az.keytd.expensetracker.dto.TransactionRequest;
 import az.keytd.expensetracker.entities.Transaction;
 import az.keytd.expensetracker.service.TransactionService;
 
@@ -26,9 +28,9 @@ public class TransactionController {
     @Autowired
     private TransactionService transactionService;
 
-    @GetMapping("{accountId}")
-    public List<Transaction> getAllByAccountId(@PathVariable Long accountId) {
-        return transactionService.getAllByAccountId(accountId);
+    @GetMapping("{id}")
+    public List<Transaction> getAllByAccountId(@PathVariable Long id) {
+        return transactionService.getAllByAccountId(id);
     }
 
     @PostMapping("income")
@@ -38,8 +40,8 @@ public class TransactionController {
     }
 
     @PostMapping("expense")
-    public ResponseEntity<Transaction> decreaseBalance(@PathVariable Long accountId, @RequestParam Double amount) {
-        transactionService.addExpense(accountId, amount);
+    public ResponseEntity<Transaction> decreaseBalance(@PathVariable Long accountId, @RequestBody TransactionRequest request) {
+        transactionService.addExpense(accountId, request);
         return ResponseEntity.ok().build();
     }
 
