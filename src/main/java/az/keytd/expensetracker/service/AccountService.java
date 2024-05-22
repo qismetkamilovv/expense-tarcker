@@ -41,13 +41,14 @@ public class AccountService {
         }
     }
 
-    public void increaseBalance(Long id, Double balance) {
+    public Account increaseBalance(Long id, Double balance) {
         Account account = findById(id);
         Double currentBalance = account.getBalance();
         Double newBalance = currentBalance + balance;
 
         account.setBalance(newBalance);
-        accountRepository.save(account);
+        return accountRepository.save(account);
+
     }
 
     public Account decraseBalance(Long id, Double balance) {

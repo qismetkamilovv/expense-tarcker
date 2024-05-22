@@ -31,7 +31,6 @@ public class TransactionService {
     @Autowired
     private AccountService accountService;
 
-    // TODO change accountId to id
     public Transaction findById(Long id) {
         Transaction transaction = transactionRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("transaction doesn't exist"));
@@ -46,33 +45,33 @@ public class TransactionService {
         return transaction;
     }
 
-    // TODO create TransactionRequest dto for amount categoryid title trnsactiondate
-    // anda accountid from pathvariable
-
-    // TODO method return should transactionEntity
-    public void addExpense(Long accountId, TransactionRequest request) {
+    public Transaction addExpense(Long accountId, TransactionRequest request) {
         Account account = accountService.decraseBalance(accountId, request.getAmount());
         Transaction transaction = new Transaction();
         transaction.setAccount(account);
         transaction.setAmount(request.getAmount());
-        // TODO request categoryid from input
         transaction.setCategoryId(request.getCategoryId());
-        // TODO request title from the input
         transaction.setTitle(request.getTitle());
-        // Todo request date from input
         transaction.setTransactionDate(request.getTransactionDate());
         transaction.setTrnType(TransactionType.EXPENSE);
         transaction.setCreateAt(LocalDateTime.now());
         transactionRepository.save(transaction);
+        return transaction;
 
     }
 
-    public void addIncome(Long accountId, Double amount) {
-        Transaction transaction = findById(accountId);
-        Double currentAmount = transaction.getAmount();
-        Double newAmount = currentAmount + amount;
-        transaction.setAmount(newAmount);
+    public Transaction addIncome(Long accountId, TransactionRequest request) {
+        Account account = accountService.increaseBalance(accountId, request.getAmount());
+        Transaction transaction = new Transaction();
+        transaction.setAccount(account);
+        transaction.setAmount(request.getAmount());
+        transaction.setCategoryId(request.getCategoryId());
+        transaction.setTrnType(TransactionType.INCOME);
+        transaction.setCreateAt(LocalDateTime.now());
+        transaction.setTitle(request.getTitle());
+        transaction.setTransactionDate(request.getTransactionDate());
         transactionRepository.save(transaction);
+        return transaction;
     }
 
     public List<Transaction> getBetween(LocalDate from, LocalDate to) {

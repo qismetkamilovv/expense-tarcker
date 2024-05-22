@@ -34,13 +34,15 @@ public class TransactionController {
     }
 
     @PostMapping("income")
-    public ResponseEntity<Transaction> increaseBalance(@PathVariable Long accountId, @RequestParam Double amount) {
-        transactionService.addIncome(accountId, amount);
+    public ResponseEntity<Transaction> increaseBalance(@PathVariable Long accountId,
+            @RequestBody TransactionRequest request) {
+        transactionService.addIncome(accountId, request);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("expense")
-    public ResponseEntity<Transaction> decreaseBalance(@PathVariable Long accountId, @RequestBody TransactionRequest request) {
+    public ResponseEntity<Transaction> decreaseBalance(@PathVariable Long accountId,
+            @RequestBody TransactionRequest request) {
         transactionService.addExpense(accountId, request);
         return ResponseEntity.ok().build();
     }
