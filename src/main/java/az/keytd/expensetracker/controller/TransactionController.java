@@ -34,17 +34,17 @@ public class TransactionController {
     }
 
     @PostMapping("income")
-    public ResponseEntity<Transaction> increaseBalance(@PathVariable Long accountId,
+    public ResponseEntity<Transaction> addIncome(@PathVariable Long accountId,
             @RequestBody TransactionRequest request) {
-        transactionService.addIncome(accountId, request);
-        return ResponseEntity.ok().build();
+        Transaction tt =transactionService.addIncome(accountId, request);
+        return ResponseEntity.ok(tt);
     }
 
     @PostMapping("expense")
-    public ResponseEntity<Transaction> decreaseBalance(@PathVariable Long accountId,
+    public ResponseEntity<Transaction> addExpense(@PathVariable Long accountId,
             @RequestBody TransactionRequest request) {
-        transactionService.addExpense(accountId, request);
-        return ResponseEntity.ok().build();
+        Transaction tt =transactionService.addExpense(accountId, request);
+        return ResponseEntity.ok(tt);
     }
 
     @GetMapping("between-dates")

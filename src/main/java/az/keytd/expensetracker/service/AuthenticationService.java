@@ -9,12 +9,7 @@ import org.springframework.stereotype.Service;
 import az.keytd.expensetracker.dto.LoginRequest;
 import az.keytd.expensetracker.dto.RegisterRequest;
 import az.keytd.expensetracker.dto.Response;
-import az.keytd.expensetracker.entities.CommonOtp;
-import az.keytd.expensetracker.entities.OtpStatus;
 import az.keytd.expensetracker.entities.User;
-import az.keytd.expensetracker.exceptions.BadRequestException;
-import az.keytd.expensetracker.exceptions.NotFoundException;
-import az.keytd.expensetracker.repository.CommonOtpRepository;
 import az.keytd.expensetracker.security.JwtService;
 
 @Service

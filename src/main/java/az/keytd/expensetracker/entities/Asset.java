@@ -1,6 +1,5 @@
 package az.keytd.expensetracker.entities;
 
-import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -28,7 +27,7 @@ public class Asset {
     private String name;
 
     @Column(name = "value")
-    private DecimalFormat value;
+    private Double value;
 
     @Column(name = "acquisition_date")
     private LocalDateTime acquisitionDate;
@@ -65,11 +64,11 @@ public class Asset {
         this.name = name;
     }
 
-    public DecimalFormat getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(DecimalFormat value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 

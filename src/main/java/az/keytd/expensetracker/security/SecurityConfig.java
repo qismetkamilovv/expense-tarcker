@@ -30,12 +30,24 @@ public class SecurityConfig {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         req -> req
-                                .requestMatchers("/auth/**", "/mail/**", "/v1/**", "/account/increaseBalance",
-                                        "/account/decraseBalance",
-                                        "/account/create", "/transaction/income", "/transaction/expense",
-                                        "/transaction/between-dates", "/transaction/transactions/export", "/user/save")
+                                .requestMatchers(
+                                    "/auth/**",
+                                    "/auth/login",
+                                        "/mail/**",
+                                        "/v1/**",
+                                        "/account/increaseBalance",
+                                        "/account/decraseBalance",                                       
+                                        "/transaction/income",
+                                        "/transaction/expense",
+                                        "/transaction/between-dates",
+                                        "/transaction/transactions/export",
+                                        "/user/save")
                                 .permitAll()
-                                .requestMatchers("/user/updateUser", "/user/get-email").authenticated())
+                                .requestMatchers(
+                                    "/user/updateUser",
+                                        "/user/get-email",
+                                        "/account/create")
+                                .authenticated())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .build();

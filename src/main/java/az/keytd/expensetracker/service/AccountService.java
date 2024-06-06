@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import az.keytd.expensetracker.dto.AccountCreateRequest;
 import az.keytd.expensetracker.entities.Account;
 import az.keytd.expensetracker.entities.AccountStatus;
 import az.keytd.expensetracker.exceptions.NotFoundException;
@@ -22,12 +23,12 @@ public class AccountService {
         return account;
     }
 
-    public Account createAccount(String name, Double balance, String type, AccountStatus status) {
+    public Account createAccount(AccountCreateRequest request) {
         Account account = new Account();
-        account.setName(name);
-        account.setBalance(balance);
-        account.setType(type);
-        account.setStatus(status);
+        account.setName(request.getName());
+        account.setBalance(request.getBalance());
+        account.setType(request.getType());
+        account.setStatus(AccountStatus.ACTIVE);
         return accountRepository.save(account);
 
     }
