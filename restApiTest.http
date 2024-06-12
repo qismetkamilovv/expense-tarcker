@@ -20,6 +20,14 @@ Content-Type: application/json
     "password": "qismet123"   
 }
 
+###
+PUT http://localhost:8080/auth/verify
+Content-Type: application/json
+
+{
+    "email":"kamilovvqismet@gmail.com",
+    "otp": "529035"   
+}
 
 ###
 POST http://localhost:8080/user/save
@@ -43,15 +51,7 @@ Content-Type: application/json
     "lastName":"Muradova",
     "email":"muradovafidan@gmail.com",
     "password":"fidan123"
-}
-
-###
-POST http://localhost:8080/mail/mail/save
-Content-Type: application/json
-
-{
-
-}
+} 
 
 
 ###
@@ -60,7 +60,7 @@ PUT http://localhost:8080/account/increaseBalance?id=1&balance=15
 ###
 POST http://localhost:8080/account/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJRaXNtZXQiLCJpYXQiOjE3MTc3MDg0MzUsImV4cCI6MTcxNzcwODUzNX0.HWSau14-C5NiTwuaH7Yr_e4X1FXvKH2XT4m_fHtVbZE
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJRaXNtZXQiLCJpYXQiOjE3MTgyMjcxOTMsImV4cCI6MTcxODIzMDc5M30.hRhIMXbodnXt0hYzFuk9dEu_xkdWHaOOkxE3g6Ox2DQ
 
 {
   "name": "ismet",
