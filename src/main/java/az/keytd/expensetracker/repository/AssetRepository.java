@@ -20,6 +20,8 @@ public interface AssetRepository extends JpaRepository<Asset, Long> {
     Optional<Asset> findByName(String name);
 
     // @Query("select a from Asset a where a.user.id=:ownerId")
-    @Query(value = "select * from Asset  where owner_id = ?",nativeQuery=true)
+    @Query(value = "select * from Asset  where owner_id = ?", nativeQuery = true)
     List<Asset> findAllByOwnerId(@Param("ownerId") Long ownerId);
+
+    Asset getById(Long id);
 }

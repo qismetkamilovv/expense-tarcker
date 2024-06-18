@@ -181,7 +181,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.firstName;
+        return this.email;
     }
 
     @Override
@@ -191,7 +191,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        ;
         return true;
     }
 

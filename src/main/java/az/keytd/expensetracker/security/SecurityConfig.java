@@ -18,8 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import az.keytd.expensetracker.filter.JwtAuthenticationFilter;
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -36,24 +34,9 @@ public class SecurityConfig {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         req -> req
-                                .requestMatchers(
-                                        "/auth/**",
-                                        "/auth/login",
-                                        "/auth/verify",
-                                        "/mail/**",
-                                        "/v1/**",
-                                        "/account/increaseBalance",
-                                        "/account/decraseBalance",
-                                        "/transaction/income",
-                                        "/transaction/expense",
-                                        "/transaction/between-dates",
-                                        "/transaction/transactions/export",
-                                        "/user/save")
+                                .requestMatchers("/auth/**")
                                 .permitAll()
-                                .requestMatchers(
-                                        "/user/updateUser",
-                                        "/user/get-email",
-                                        "/account/create")
+                                .anyRequest()
                                 .authenticated())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
