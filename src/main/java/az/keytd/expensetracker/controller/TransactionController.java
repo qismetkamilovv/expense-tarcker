@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +32,23 @@ public class TransactionController {
     @GetMapping("{id}")
     public List<Transaction> getAllByAccountId(@PathVariable Long id) {
         return transactionService.getAllByAccountId(id);
+    }
+
+    @GetMapping
+    public List<Transaction> findAllActive(){
+        return transactionService.findAllActive();
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> softDeleteTransaction(@PathVariable Long id){
+        transactionService.softDeleteTransaction(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<Void> restore(@PathVariable Long id){
+        transactionService.restore(id);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("income")

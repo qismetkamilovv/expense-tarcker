@@ -26,12 +26,12 @@ public class AssetController {
     @Autowired
     private AssetService assetService;
 
-    @PostMapping("create")
+    @PostMapping()
     public Asset createAsset(@RequestBody CreateAssetRequest request) {
         return assetService.createAsset(request);
     }
 
-    @DeleteMapping("delete")
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteAsset(@PathVariable Long id){
         assetService.deleteAsset(id);
         return ResponseEntity.ok().build();

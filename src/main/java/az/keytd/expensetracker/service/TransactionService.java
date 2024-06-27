@@ -29,6 +29,18 @@ public class TransactionService {
     @Autowired
     private AccountService accountService;
 
+    public void softDeleteTransaction(Long id) {
+        transactionRepository.softDelete(id, LocalDateTime.now());
+    }
+
+    public void restore(Long id) {
+        transactionRepository.restore(id);
+    }
+
+    public List<Transaction> findAllActive() {
+        return transactionRepository.findAllActive();
+    }
+
     public Transaction findById(Long id) {
         Transaction transaction = transactionRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("transaction doesn't exist"));

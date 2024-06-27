@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -28,10 +29,11 @@ public class Transaction {
     @Column(name = "amount")
     private Double amount;
 
+    //todo create relation to category 
+    @OneToMany
     @Column(name = "category_id")
     private Long categoryId;
 
-    //TODO change the type LocalDate
     @Column(name = "transaction_date")
     private LocalDate transactionDate;
 
@@ -44,12 +46,13 @@ public class Transaction {
     @Column(name = "update_at")
     private LocalDateTime updateAt;
 
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
+
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
 
-    // @JoinColumn(name = "categoryId")
-    // private ;
 
     public Long getId() {
         return id;

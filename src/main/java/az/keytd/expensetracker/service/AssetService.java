@@ -27,13 +27,12 @@ public class AssetService {
 
     public Asset getById(Long id) {
         return assetRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Asset is not existed"));
+                .orElseThrow(() -> new NotFoundException("Asset not found"));
     }
 
     public void deleteAsset(Long id) {
         assetRepository.deleteById(id);
     }
-    // TODO create method getallbyownerID
 
     public List<Asset> findAllByOwnerId(Long ownerId) {
        return assetRepository.findAllByOwnerId(ownerId);
