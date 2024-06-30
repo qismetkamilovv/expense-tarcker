@@ -14,23 +14,32 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "id")
-    private Long id ;
+    private Integer id ;
 
     @Column(name = "name")
     private String name;
 
     @Column(name = "parent_id")
-    private int parentId;
+    private Integer parentId;
     
     @Column(name = "type")
     private CategoryType type ;
 
-    public Long getId() {
+    public Category (Integer id){
+        this.id = id ;
+    }
+
+    public Category (){
+        
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Category setId(Integer id) {
         this.id = id;
+        return this ;
     }
 
     public String getName() {
@@ -41,11 +50,11 @@ public class Category {
         this.name = name;
     }
 
-    public int getParentId() {
+    public Integer getParentId() {
         return parentId;
     }
 
-    public void setParentId(int parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
 

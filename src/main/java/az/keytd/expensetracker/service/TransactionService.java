@@ -16,6 +16,7 @@ import java.io.IOException;
 
 import az.keytd.expensetracker.dto.TransactionRequest;
 import az.keytd.expensetracker.entities.Account;
+import az.keytd.expensetracker.entities.Category;
 import az.keytd.expensetracker.entities.Transaction;
 import az.keytd.expensetracker.entities.TransactionType;
 import az.keytd.expensetracker.exceptions.NotFoundException;
@@ -60,7 +61,7 @@ public class TransactionService {
         Transaction transaction = new Transaction();
         transaction.setAccount(account);
         transaction.setAmount(request.getAmount());
-        transaction.setCategoryId(request.getCategoryId());
+        transaction.setCategory(new Category(request.getCategoryId()));
         transaction.setTitle(request.getTitle());
         transaction.setTransactionDate(request.getTransactionDate());
         transaction.setTrnType(TransactionType.EXPENSE);
@@ -75,7 +76,7 @@ public class TransactionService {
         Transaction transaction = new Transaction();
         transaction.setAccount(account);
         transaction.setAmount(request.getAmount());
-        transaction.setCategoryId(request.getCategoryId());
+        transaction.setCategory(new Category(request.getCategoryId()));
         transaction.setTrnType(TransactionType.INCOME);
         transaction.setCreateAt(LocalDateTime.now());
         transaction.setTitle(request.getTitle());
@@ -110,7 +111,7 @@ public class TransactionService {
             row.createCell(0).setCellValue(transaction.getId());
             row.createCell(1).setCellValue(transaction.getTitle());
             row.createCell(2).setCellValue(transaction.getAmount());
-            row.createCell(3).setCellValue(transaction.getCategoryId());
+            // row.createCell(3).setCellValue(transaction.getCategoryId());
             row.createCell(4).setCellValue(transaction.getTransactionDate().format(formatter));
             row.createCell(5).setCellValue(transaction.getTrnType().toString());
             row.createCell(6).setCellValue(transaction.getCreateAt().format(formatter));

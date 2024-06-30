@@ -45,13 +45,13 @@ public class TransactionController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @GetMapping("/restore")
     public ResponseEntity<Void> restore(@PathVariable Long id){
         transactionService.restore(id);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("income")
+    @PostMapping("{accountId}/income")
     public ResponseEntity<Transaction> addIncome(@PathVariable Long accountId,
             @RequestBody TransactionRequest request) {
         Transaction tt =transactionService.addIncome(accountId, request);

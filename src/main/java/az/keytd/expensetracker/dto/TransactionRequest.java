@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class TransactionRequest {
 
-    private Long categoryId;
+    private Integer categoryId;
     private Double amount;
     private LocalDate transactionDate;
     private String title;
@@ -17,11 +17,11 @@ public class TransactionRequest {
         this.title = title;
     }
 
-    public Long getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
