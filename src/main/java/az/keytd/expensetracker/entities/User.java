@@ -3,7 +3,9 @@ package az.keytd.expensetracker.entities;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
+import org.hibernate.mapping.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +17,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,10 +29,10 @@ public class User implements UserDetails {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "email")
@@ -50,18 +53,22 @@ public class User implements UserDetails {
     @Column(name = "avatar")
     private String avatar;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private String role;
+    private Role role;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private UserStatus status;
 
-    @Column(name = "createdAt")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "uptadedAt")
+    @Column(name = "uptaded_at")
     private LocalDateTime uptadedAt;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Account> account;
 
     public Long getId() {
         return id;
@@ -135,11 +142,11 @@ public class User implements UserDetails {
         this.avatar = avatar;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -169,12 +176,12 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(role));
+        return Collections.singleton(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
     public String getUsername() {
-        return this.firstName;
+        return this.email;
     }
 
     @Override
@@ -184,7 +191,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        ;
         return true;
     }
 

@@ -5,10 +5,11 @@ Content-Type:  application/json
     "firstName":"Qismet",
     "lastName": "Kamilov",
     "email":"kamilovvqismet@gmail.com",
-    "role":"Admin",
+    "role":"ADMIN",
     "password": "qismet123"
 
 }
+
 
 ###
 POST http://localhost:8080/auth/login
@@ -19,9 +20,17 @@ Content-Type: application/json
     "password": "qismet123"   
 }
 
+###
+PUT http://localhost:8080/auth/verify
+Content-Type: application/json
+
+{
+    "email":"kamilovvqismet@gmail.com",
+    "otp": "529035"   
+}
 
 ###
-POST http://localhost:8080/user/user/save
+POST http://localhost:8080/user/save
 Content-Type: application/json
 
 {
@@ -30,11 +39,11 @@ Content-Type: application/json
     "email":"muradovafidan@gmail.com",
     "password":"fidan123",
     "role":"User",
-    "status":"Active"
+    "status":"ACTIVE"
 }
 
 ###
-PUT http://localhost:8080/user/uptadeUser
+PUT http://localhost:8080/user/uptadeUser?1
 Content-Type: application/json
 
 {
@@ -42,40 +51,37 @@ Content-Type: application/json
     "lastName":"Muradova",
     "email":"muradovafidan@gmail.com",
     "password":"fidan123"
-}
-
-###
-POST http://localhost:8080/mail/mail/save
-Content-Type: application/json
-
-{
-
-}
+} 
 
 
 ###
 PUT http://localhost:8080/account/increaseBalance?id=1&balance=15
 
+###
+POST http://localhost:8080/account/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJRaXNtZXQiLCJpYXQiOjE3MTgyMjcxOTMsImV4cCI6MTcxODIzMDc5M30.hRhIMXbodnXt0hYzFuk9dEu_xkdWHaOOkxE3g6Ox2DQ
+
+{
+  "name": "ismet",
+  "balance": 2000000,
+  "type": "salary"
+}
 
 ###
-PUT http://localhost:8080/account/decraseBalance?id=1&balance=15
-
-
-###
-PUT http://localhost:8080/Expense/new-expense?accountId=1&amount=15
-
-
-###
-GET http://localhost:8080/income/all
-
-
-###
-PUT http://localhost:8080/income/income/add?userId=1&amount=20
-
+PUT http://localhost:8080/account/decraseBalance?id=2&balance=1200
 
 ###
 GET http://localhost:8080/user/user/email?email=qismet600@gmail.com
 
+###
+GET http://localhost:8080/transactions/1
 
 ###
-GET http://localhost:8080/mail/sendmail?to=kamilovvqismet@gmail.com&text=salamm
+POST http://localhost:8080/transaction/income?1&amount=2000
+
+###
+POST http://localhost:8080/transaction/expense?1&amount=100
+
+###
+GET http://localhost:8080/transaction/beetwen-dates?from=2024-5-18&to=2024-5-19

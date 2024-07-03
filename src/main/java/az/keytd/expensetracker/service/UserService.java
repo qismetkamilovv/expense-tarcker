@@ -24,15 +24,14 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String firstName) throws UsernameNotFoundException {
-        return getByEmail(firstName);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return getByEmail(email);
 
     }
 
     public User getByEmail(String email) {
-        User user = userRepository.findByEmail(email)
+        return userRepository.findByEmail(email)
                 .orElseThrow(() -> new NotFoundException(email + " not found"));
-        return userRepository.getByEmail(email);
     }
 
     public User updateUser(Long id, CreateUser us) {
@@ -54,15 +53,22 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public User save(RegisterRequest newUser, PasswordEncoder passwordEncoder) {
+    public User save(RegisterRequest newUser, String encodedPassword) {
         User user = new User();
         user.setFirstName(newUser.getFirstName());
         user.setLastName(newUser.getLastName());
         user.setEmail(newUser.getEmail());
-        user.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        user.setPassword(encodedPassword);
         user.setRole(newUser.getRole());
-        user.setStatus(UserStatus.UNCONFIRMED);
+        user.setStatus(UserStatus.UNVERIFIED);
         return userRepository.save(user);
+    }
+
+    public User verify(String email) {
+        User user = getByEmail(email);
+        user.setStatus(UserStatus.VERIFIED);
+        return userRepository.save(user);
+
     }
 
 }

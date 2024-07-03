@@ -11,4 +11,6 @@ import az.keytd.expensetracker.entities.Account;
 public interface AccountRepository extends JpaRepository<Account,Long>{
 
     List<Account> findAllByUserId(Long userId);
+
+    
 }

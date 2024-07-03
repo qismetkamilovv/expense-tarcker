@@ -26,10 +26,10 @@ public class CommonOtp {
     @Column(name = "otp")
     private String otp;
 
-    @Column(name = "createdAt")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
     
-    @Column(name = "retryCount")
+    @Column(name = "retry_count")
     private int retryCount;
     
     @Enumerated(EnumType.STRING)

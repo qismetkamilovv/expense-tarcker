@@ -2,3 +2,43 @@ learn about enum;
 difference beetwen RequestParam, PathVAriable, RequestBody;
 http path structure;
 send OTP with mail;
+
+
+=================================================================
+manually test your endpoints:
+    create user, and account for that for, add few income/expenses (transactions)
+
+=========================== for review
+hashCode - https://www.baeldung.com/java-hashcode;
+
+hashcode, equals, toString read about these methods; 
+
+Singleton design pattern;
+
+read about java string class - http s://www.programiz.com/java-programming/string ; 
+
+SOLID principles;
+
+Read about spring boot bean scope;
+
+==========================
+Entitydeki tablelarin  adi cem ,columnlar undersscore;
+read about stack and queue;
+=============================
+@service,@component,@repository deferences between this
+spring jpa drived methods
+========================
+spring inversion of control
+dependency injection 
+<this super> what does this keywords do
+==========================
+fibbonacci
+binary search
+linear search
+merge sort
+brute force sort
+
+===========================
+https://leetcode.com/problems/valid-parentheses/description/
+create asset endpoints (crud)
+

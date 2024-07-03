@@ -7,19 +7,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name ="account")
+@Table(name = "accounts")
 public class Account {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "id")
     private Long id;
-
-    @Column(name = "userId")
-    private Long userId;
 
     @Column(name = "name")
     private String name;
@@ -31,16 +32,20 @@ public class Account {
     private String type;
 
     @Column(name = "status")
-    private String status;
+    private AccountStatus status;
 
-    @Column(name = "createAt")
+    @Column(name = "create_at")
     private LocalDateTime createAt;
 
-    @Column(name = "updatedAt")
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "deletedAt")
+    @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Long getId() {
         return id;
@@ -48,14 +53,6 @@ public class Account {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getName() {
@@ -82,11 +79,11 @@ public class Account {
         this.type = type;
     }
 
-    public String getStatus() {
+    public AccountStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(AccountStatus status) {
         this.status = status;
     }
 

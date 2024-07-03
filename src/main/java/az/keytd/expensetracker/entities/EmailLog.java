@@ -30,10 +30,10 @@ public class EmailLog {
     @Column(name = "status")
     private EmailSendStatus status;
 
-    @Column(name = "sendTimesTamp")
+    @Column(name = "sendTimes_tamp")
     private LocalDateTime sendTimesTamp;
 
-    @Column(name = "errorMessage")
+    @Column(name = "error_message")
     private String errorMessage;
 
     @Column(name = "type")

@@ -6,6 +6,7 @@ public class NotFoundException extends RuntimeException{
     }
 
     public NotFoundException(){
+        // TODO: it would be better to call above constructor with "this("your msg")"
         super("not Found") ;
     }
 }
