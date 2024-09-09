@@ -4,16 +4,84 @@ Content-Type:  application/json
 {
     "firstName":"Qismet",
     "lastName": "Kamilov",
-    "email":"qismet600@gmail.com",
-    "role":"Admin",
-    "password": "qismet123",
+    "email":"kamilovvqismet@gmail.com",
+    "role":"ADMIN",
+    "password": "qismet123"
+
 }
+
 
 ###
 POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-    "mail":"qismet600@gmail.com",
+    "mail":"kamilovvqismet@gmail.com",
     "password": "qismet123"   
 }
+
+###
+PUT http://localhost:8080/auth/verify
+Content-Type: application/json
+
+{
+    "email":"kamilovvqismet@gmail.com",
+    "otp": "529035"   
+}
+
+###
+POST http://localhost:8080/user/save
+Content-Type: application/json
+
+{
+    "firstName":"Fidan",
+    "lastName":"Muradova",
+    "email":"muradovafidan@gmail.com",
+    "password":"fidan123",
+    "role":"User",
+    "status":"ACTIVE"
+}
+
+###
+PUT http://localhost:8080/user/uptadeUser?1
+Content-Type: application/json
+
+{
+    "firstName":"Fidan",
+    "lastName":"Muradova",
+    "email":"muradovafidan@gmail.com",
+    "password":"fidan123"
+} 
+
+
+###
+PUT http://localhost:8080/account/increaseBalance?id=1&balance=15
+
+###
+POST http://localhost:8080/account/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJRaXNtZXQiLCJpYXQiOjE3MTgyMjcxOTMsImV4cCI6MTcxODIzMDc5M30.hRhIMXbodnXt0hYzFuk9dEu_xkdWHaOOkxE3g6Ox2DQ
+
+{
+  "name": "ismet",
+  "balance": 2000000,
+  "type": "salary"
+}
+
+###
+PUT http://localhost:8080/account/decraseBalance?id=2&balance=1200
+
+###
+GET http://localhost:8080/user/user/email?email=qismet600@gmail.com
+
+###
+GET http://localhost:8080/transactions/1
+
+###
+POST http://localhost:8080/transaction/income?1&amount=2000
+
+###
+POST http://localhost:8080/transaction/expense?1&amount=100
+
+###
+GET http://localhost:8080/transaction/beetwen-dates?from=2024-5-18&to=2024-5-19

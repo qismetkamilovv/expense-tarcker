@@ -9,45 +9,48 @@ import org.springframework.stereotype.Service;
 import az.keytd.expensetracker.dto.LoginRequest;
 import az.keytd.expensetracker.dto.RegisterRequest;
 import az.keytd.expensetracker.dto.Response;
-import az.keytd.expensetracker.entities.Users;
-import az.keytd.expensetracker.repository.UsersRepository;
+import az.keytd.expensetracker.entities.User;
 import az.keytd.expensetracker.security.JwtService;
 
 @Service
 public class AuthenticationService {
 
     @Autowired
-    private UsersRepository userRepository;
+    private UserService userService;
 
     @Autowired
     private JwtService jwtService;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private CommonOtpService otpService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public Response register(RegisterRequest request) {
-        Users user = new Users();
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
-        user.setRole(request.getRole());
-        user.setEmail(request.getEmail());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        userRepository.save(user);
-
+        String encodedPassword = passwordEncoder.encode(request.getPassword());
+        User user = userService.save(request, encodedPassword);
         String token = jwtService.generateToken(user);
-
+        otpService.sendByEmail(user.getEmail());
         return new Response(200, "ok", token);
 
     }
 
-    public Response login(LoginRequest request){
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-        Users user = userRepository.findByEmail(request.getEmail());
+    public Response login(LoginRequest request) {
+        authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        User user = userService.getByEmail(request.getEmail());
         String token = jwtService.generateToken(user);
 
         return new Response(200, "ok", token);
+    }
+
+    public void verify(String email, String otp) {
+        otpService.checkOTP(email, otp);
+        userService.verify(email);
+
     }
 }

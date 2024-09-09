@@ -1,33 +1,38 @@
 package az.keytd.expensetracker.entities;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
+import org.hibernate.mapping.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Users")
-
-public class Users implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "email")
@@ -48,23 +53,28 @@ public class Users implements UserDetails {
     @Column(name = "avatar")
     private String avatar;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private String role;
+    private Role role;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private UserStatus status;
 
-    @Column(name = "createdAt")
-    private String createdAt;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
-    @Column(name = "uptadedAt")
-    private String uptadedAt;
-    
-    public long getId() {
+    @Column(name = "uptaded_at")
+    private LocalDateTime uptadedAt;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Account> account;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -132,56 +142,56 @@ public class Users implements UserDetails {
         this.avatar = avatar;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    public String getStatus() {
+    public UserStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(UserStatus status) {
         this.status = status;
     }
 
-    public String getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getUptadedAt() {
+    public LocalDateTime getUptadedAt() {
         return uptadedAt;
     }
 
-    public void setUptadedAt(String uptadedAt) {
+    public void setUptadedAt(LocalDateTime uptadedAt) {
         this.uptadedAt = uptadedAt;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-         return Collections.singleton(new SimpleGrantedAuthority(role)) ;
+        return Collections.singleton(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
     public String getUsername() {
-        return this.firstName;
+        return this.email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-       return true;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        ;return true;
+        return true;
     }
 
     @Override
@@ -194,5 +204,4 @@ public class Users implements UserDetails {
         return true;
     }
 
-   
 }

@@ -1,5 +1,7 @@
 package az.keytd.expensetracker.dto;
 
+import az.keytd.expensetracker.entities.Role;
+
 public class RegisterRequest {
     private String firstName;
 
@@ -7,12 +9,21 @@ public class RegisterRequest {
 
     private String email;
 
+    private Role role ;
+    
     private String password;
 
-    private String role ;
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public void setFirstName(String firstName) {
@@ -43,12 +54,5 @@ public class RegisterRequest {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
 }
